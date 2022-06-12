@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">OngSomosMas</string>
+    <string name="name_lastname">Nombre y Apellido</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repite la contraseña</string>
+    <string name="register">Registrarme</string>
+    <string name="redirect">Ya tienes cuenta? Ingresa!</string>
 </resources>
