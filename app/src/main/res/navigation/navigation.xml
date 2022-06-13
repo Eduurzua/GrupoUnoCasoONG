@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/FragmentLogin"
+    android:id="@+id/navigation">
+    <fragment
+        android:id="@+id/FragmentLogin"
+        android:name="com.example.ongsomosmas.Fragment.FragmentLogin"
+        tools:layout="@layout/activity_login"
+        android:label="fragment start">
+        <action
+            android:id="@+id/action_login_to_signUp"
+            app:destination="@id/FragmentSignUp"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentSignUp"
+        android:name="com.example.ongsomosmas.Fragment.FragmentSignUp"
+        tools:layout="@layout/activity_sign_up"
+        android:label="fragment terms">
+        <action
+            android:id="@+id/action_signUp_to_login"
+            app:destination="@id/FragmentLogin"/>
+    </fragment>
+</navigation>
