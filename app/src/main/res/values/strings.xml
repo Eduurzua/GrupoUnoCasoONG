@@ -6,4 +6,6 @@
     <string name="repeat_password">Repite la contraseña</string>
     <string name="register">Registrarme</string>
     <string name="redirect">Ya tienes cuenta? Ingresa!</string>
+    <string name="login">Login</string>
+    <string name="sing_up">No tienes cuenta? Registrate!</string>
 </resources>
