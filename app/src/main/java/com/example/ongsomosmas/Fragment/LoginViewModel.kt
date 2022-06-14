@@ -1,13 +1,11 @@
-package com.example.ongsomosmas.views
+package com.example.ongsomosmas.Fragment
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel() {
     val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(\\.)(.{1,})"
-    val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$"
+    val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$" /*largo 8*/
 
-    val showToast: MutableLiveData<Boolean> = MutableLiveData()
 
     fun validateEmail(email: String) : Boolean{
         val result = EMAIL_REGEX.toRegex().matches(email)
@@ -24,11 +22,11 @@ class LoginViewModel : ViewModel() {
     }
 
     //*buscar mejor validador de boleanos*//
-    fun validateAll(email:String, password: String) : Boolean {
-        val result = validateEmail(email).equals(validatePassword(password))
+    fun login(email:String, password: String) {
+        val resultEmail = validateEmail(email)
+        val resultPassword = validatePassword(password)
 
-        return result
-
+        /*si ambos son true */
     }
 
 }
