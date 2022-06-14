@@ -1,24 +1,26 @@
 package com.example.ongsomosmas.Post
 
+import com.example.ongsomosmas.Model.Login
+import com.example.ongsomosmas.Model.Register
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class PostRemoteDataSource {
 
-    fun getPost(id: Int, listener: ResponseListener<Post>) {
+    fun registerUser(register: Register, listener: ResponseListener<Register>) {
         val service = RetrofitService.instance
             .create(PostService::class.java)
-            .getPost(id)
+            .registerUser(register)
 
-        service.enqueue(object : Callback<Post> {
+        service.enqueue(object : Callback<Register> {
 
-            override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                val post = response.body()
-                if (response.isSuccessful && post != null) {
+            override fun onResponse(call: Call<Register>, response: Response<Register>) {
+                val createdPost = response.body()
+                if (response.isSuccessful && createdPost != null) {
                     listener.onResponse(
                         RepositoryResponse(
-                            data = post,
+                            data = createdPost,
                             source = Source.REMOTE
                         )
                     )
@@ -33,7 +35,7 @@ class PostRemoteDataSource {
                 }
             }
 
-            override fun onFailure(call: Call<Post>, t: Throwable) {
+            override fun onFailure(call: Call<Register>, t: Throwable) {
                 listener.onError(
                     RepositoryError(
                         message = t.message ?: "Error inesperado",
@@ -45,20 +47,19 @@ class PostRemoteDataSource {
 
         })
     }
-
-    fun getPosts(str: String, listener: ResponseListener<Post>) {
+    fun loginUser(login: Login, listener: ResponseListener<Login>) {
         val service = RetrofitService.instance
             .create(PostService::class.java)
-            .getPosts(str)
+            .loginUser(login)
 
-        service.enqueue(object : Callback<Post> {
+        service.enqueue(object : Callback<Login> {
 
-            override fun onResponse(call: Call<Post>, response: Response<Post>) {
-                val post = response.body()
-                if (response.isSuccessful && post != null) {
+            override fun onResponse(call: Call<Login>, response: Response<Login>) {
+                val createdPost = response.body()
+                if (response.isSuccessful && createdPost != null) {
                     listener.onResponse(
                         RepositoryResponse(
-                            data = post,
+                            data = createdPost,
                             source = Source.REMOTE
                         )
                     )
@@ -73,7 +74,7 @@ class PostRemoteDataSource {
                 }
             }
 
-            override fun onFailure(call: Call<Post>, t: Throwable) {
+            override fun onFailure(call: Call<Login>, t: Throwable) {
                 listener.onError(
                     RepositoryError(
                         message = t.message ?: "Error inesperado",
