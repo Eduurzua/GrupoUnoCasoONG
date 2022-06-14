@@ -5,41 +5,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.ongsomosmas.Model.Login
 import com.example.ongsomosmas.Model.Register
 import com.example.ongsomosmas.R
-import com.example.ongsomosmas.databinding.ActivityLoginBinding
+import com.example.ongsomosmas.databinding.ActivitySignUpBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
 
+class FragmentSignUp : Fragment() {
 
-class FragmentLogin : Fragment() {
-
-    private lateinit var binding : ActivityLoginBinding
+    private lateinit var binding : ActivitySignUpBinding
     private val viewModel: MainViewModel by viewModels(
         factoryProducer = { VideModelFactory() }
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = ActivityLoginBinding.inflate(inflater, container,false)
+        binding = ActivitySignUpBinding.inflate(inflater, container, false)
 
-        binding.btSingUp.setOnClickListener {
-            findNavController().navigate(R.id.action_login_to_signUp)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_signUp_to_login)
         }
 
-        binding.btnLogin.setOnClickListener {
-            viewModel.loginUser(Login(binding.tiEmail.editText?.text.toString(),binding.tiPassword.editText?.text.toString()))
-            //Toast.makeText(context, "error", Toast.LENGTH_SHORT).show()
+        binding.btRegisterButton.setOnClickListener {
+            viewModel.registerUser(Register(binding.tiNameLastname.editText?.text.toString(),binding.tiEmail.editText?.text.toString(),binding.tiPassword.editText?.text.toString()))
         }
 
-        viewModel.login.observe(viewLifecycleOwner) { value ->
+        viewModel.register.observe(viewLifecycleOwner) { value ->
             if (value != null) {
-                println("Entro en el IF  : $value")
+                println("Entro en el IF")
             } else {
-                println("Entro en el Else  : $value")
+                println("Entro en el Else")
             }
         }
 
@@ -50,4 +49,5 @@ class FragmentLogin : Fragment() {
         }
         return binding.root
     }
+
 }
