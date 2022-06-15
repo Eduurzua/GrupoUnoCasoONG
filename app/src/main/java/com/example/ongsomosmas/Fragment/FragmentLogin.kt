@@ -32,8 +32,6 @@ class FragmentLogin : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = ActivityLoginBinding.inflate(inflater, container,false)
 
-        /*el boton comienza desactivado*/
-        binding.btnLogin.isEnabled = false
 
 
         binding.btSingUp.setOnClickListener {
@@ -99,7 +97,7 @@ class FragmentLogin : Fragment() {
             binding.tiPassword.error = "Campo contraseña no puede estar vacío"
             false
         }else if (!passwordRegex.matcher(password).matches()){
-            binding.tiPassword.error = "La contraseña es débil"
+            binding.tiPassword.error = "La contraseña es inválida"
             false
         }else {
             binding.tiPassword.error = null
