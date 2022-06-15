@@ -3,15 +3,19 @@ package com.example.ongsomosmas.views
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ongsomosmas.Model.*
-import com.example.ongsomosmas.Post.PostRepository
+import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
 import com.example.ongsomosmas.Post.ResponseListener
+import com.example.ongsomosmas.databinding.ActivityLoginBinding
+import com.example.ongsomosmas.databinding.ActivitySignUpBinding
 
 class MainViewModel(
-    private val repository: PostRepository
+    private val repository: Repository
 ): ViewModel() {
 
+    private lateinit var bindingSignUp : ActivitySignUpBinding
+    private lateinit var bindingLogin : ActivityLoginBinding
     val success = MutableLiveData<Boolean>(false)
     val message = MutableLiveData<String>(null)
     val user = MutableLiveData<User>(null)
@@ -58,6 +62,18 @@ class MainViewModel(
             }
 
         })
+    }
+
+    fun clearTextSignUp(){
+        bindingSignUp.tiPassword.editText?.text?.clear()
+        bindingSignUp.tiEmail.editText?.text?.clear()
+        bindingSignUp.tiPassword.editText?.text?.clear()
+        bindingSignUp.tiRepeatPassword.editText?.text?.clear()
+    }
+
+    fun clearTextLogin(){
+        bindingLogin.tiPassword.editText?.text?.clear()
+        bindingLogin.tiEmail.editText?.text?.clear()
     }
 
 }

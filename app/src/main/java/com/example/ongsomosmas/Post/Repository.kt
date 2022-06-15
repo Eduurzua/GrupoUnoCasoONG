@@ -4,9 +4,9 @@ import com.example.ongsomosmas.Model.Login
 import com.example.ongsomosmas.Model.Register
 import com.example.ongsomosmas.Model.UserRegister
 
-class PostRepository(
+class Repository(
 
-    private val remoteDataSource: PostRemoteDataSource) {
+    private val remoteDataSource: ApiRemoteDataSource) {
 
     fun registerUser(register : Register, listener: ResponseListener<UserRegister>) {
         this.remoteDataSource.registerUser(register,listener)

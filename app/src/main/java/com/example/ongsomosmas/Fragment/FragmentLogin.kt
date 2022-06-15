@@ -16,22 +16,26 @@ import com.example.ongsomosmas.views.VideModelFactory
 
 class FragmentLogin : Fragment() {
 
-    private lateinit var binding : ActivityLoginBinding
-    private val viewModel: MainViewModel by viewModels(
-        factoryProducer = { VideModelFactory() }
-    )
+    private lateinit var binding: ActivityLoginBinding
+    private val viewModel: MainViewModel by viewModels(factoryProducer = { VideModelFactory() })
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = ActivityLoginBinding.inflate(inflater, container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = ActivityLoginBinding.inflate(inflater, container, false)
+        val fragmentContext = container?.context
 
         binding.btSingUp.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_signUp)
         }
 
         binding.btnLogin.setOnClickListener {
-            viewModel.loginUser(Login(
-                 binding.tiEmail.editText?.text.toString(),
-                 binding.tiPassword.editText?.text.toString()
+            viewModel.loginUser(
+                Login(
+                    binding.tiEmail.editText?.text.toString(),
+                    binding.tiPassword.editText?.text.toString()
                 )
             )
             viewModel.success.observe(viewLifecycleOwner) { response ->
@@ -43,16 +47,14 @@ class FragmentLogin : Fragment() {
             }
             viewModel.error.observe(viewLifecycleOwner) { response ->
                 if (response != null) {
-                    DialogFragment(getString(R.string.loginError)).show(childFragmentManager, DialogFragment.TAG)
-                    clearText()
+                    DialogFragment(getString(R.string.loginError), fragmentContext).show(
+                        childFragmentManager,
+                        DialogFragment.TAG
+                    )
+                    viewModel.clearTextLogin()
                 }
             }
         }
         return binding.root
-    }
-
-    private fun clearText(){
-        binding.tiPassword.editText?.text?.clear()
-        binding.tiEmail.editText?.text?.clear()
     }
 }

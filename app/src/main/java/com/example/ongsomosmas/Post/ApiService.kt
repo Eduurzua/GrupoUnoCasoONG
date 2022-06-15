@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface PostService {
+interface ApiService {
 
     @POST("/api/register")
     fun registerUser(@Body register: Register): Call<RepositoryResponse<UserRegister>>
