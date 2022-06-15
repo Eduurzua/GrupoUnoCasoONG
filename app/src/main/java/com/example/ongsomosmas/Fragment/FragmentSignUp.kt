@@ -25,26 +25,25 @@ class FragmentSignUp : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = ActivitySignUpBinding.inflate(inflater, container, false)
+        val fragmentContext = container?.context
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_signUp_to_login)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // findNavController().popBackStack()
+            findNavController().navigateUp()
         }
 
         binding.btRegisterButton.setOnClickListener {
+
             viewModel.registerUser(Register(binding.tiNameLastname.editText?.text.toString(),binding.tiEmail.editText?.text.toString(),binding.tiPassword.editText?.text.toString()))
-        }
 
-        viewModel.register.observe(viewLifecycleOwner) { value ->
-            if (value != null) {
-                println("Entro en el IF")
-            } else {
-                println("Entro en el Else")
+            viewModel.success.observe(viewLifecycleOwner) { response ->
+                //TO DO
             }
-        }
-
-        viewModel.error.observe(viewLifecycleOwner) { value ->
-            if (value != null) {
-                Toast.makeText(context,value, Toast.LENGTH_LONG).show()
+            viewModel.error.observe(viewLifecycleOwner) { response ->
+                if (response != null) {
+                    DialogFragment(getString(R.string.bodyError),fragmentContext).show(childFragmentManager, DialogFragment.TAG)
+                    viewModel.clearTextSignUp()
+                }
             }
         }
         return binding.root

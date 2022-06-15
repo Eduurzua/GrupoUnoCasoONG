@@ -1,7 +1,8 @@
 package com.example.ongsomosmas.Post
 
-class RepositoryError(
+import com.example.ongsomosmas.Model.Errors
+
+data class RepositoryError(
     val message: String,
-    val code: Int,
-    val source: Source
+    val errors: Errors?
 )
