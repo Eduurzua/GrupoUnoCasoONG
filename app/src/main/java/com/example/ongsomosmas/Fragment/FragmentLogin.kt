@@ -26,19 +26,16 @@ class FragmentLogin : Fragment() {
         factoryProducer = { VideModelFactory() }
     )
 
-    private val loginViewModel : LoginViewModel by viewModels()
     val result : Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = ActivityLoginBinding.inflate(inflater, container,false)
 
-
-
         binding.btSingUp.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_signUp)
         }
 
-        /*preguntar*/
+
         binding.btnLogin.setOnClickListener {
             if (validate()) {
                 viewModel.loginUser(Login(binding.tiEmail.editText?.text.toString(),binding.tiPassword.editText?.text.toString()))
