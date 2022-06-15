@@ -40,6 +40,7 @@ class FragmentLogin : Fragment() {
             findNavController().navigate(R.id.action_login_to_signUp)
         }
 
+        /*preguntar*/
         binding.btnLogin.setOnClickListener {
             if (validate()) {
                 viewModel.loginUser(Login(binding.tiEmail.editText?.text.toString(),binding.tiPassword.editText?.text.toString()))
