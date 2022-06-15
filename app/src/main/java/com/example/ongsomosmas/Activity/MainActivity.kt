@@ -7,6 +7,7 @@ import com.example.ongsomosmas.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_OngSomosMas);
         setContentView(R.layout.activity_main)
     }
 }

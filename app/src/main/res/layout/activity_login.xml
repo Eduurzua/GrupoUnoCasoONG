@@ -67,15 +67,16 @@
         android:id="@+id/bt_sing_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="567dp"
         android:background="@android:color/transparent"
         android:text="@string/sing_up"
         android:textColor="@color/black"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:layout_constraintVertical_bias="0.507" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

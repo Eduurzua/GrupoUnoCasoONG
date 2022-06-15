@@ -2,84 +2,85 @@ package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Model.Login
 import com.example.ongsomosmas.Model.Register
+import com.example.ongsomosmas.Model.UserRegister
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class PostRemoteDataSource {
 
-    fun registerUser(register: Register, listener: ResponseListener<Register>) {
+    fun registerUser(register: Register, listener: ResponseListener<UserRegister>) {
         val service = RetrofitService.instance
             .create(PostService::class.java)
             .registerUser(register)
 
-        service.enqueue(object : Callback<Register> {
-
-            override fun onResponse(call: Call<Register>, response: Response<Register>) {
-                val createdPost = response.body()
-                if (response.isSuccessful && createdPost != null) {
+        service.enqueue(object: Callback<RepositoryResponse<UserRegister>> {
+            override fun onResponse(call: Call<RepositoryResponse<UserRegister>>, response: Response<RepositoryResponse<UserRegister>>) {
+                val callResponse = response.body()
+                if(response.isSuccessful && null != callResponse) {
                     listener.onResponse(
                         RepositoryResponse(
-                            data = createdPost,
-                            source = Source.REMOTE
-                        )
+                            callResponse.success,
+                            callResponse.data,
+                            callResponse.message,
+                            null)
                     )
                 } else {
                     listener.onError(
                         RepositoryError(
-                            message = "El servidor rechazó la solicitud",
-                            code = response.code(),
-                            source = Source.REMOTE
+                            callResponse?.message ?: run { "Unexpected Error"},
+                            callResponse?.errors
                         )
                     )
                 }
             }
 
-            override fun onFailure(call: Call<Register>, t: Throwable) {
+            override fun onFailure(call: Call<RepositoryResponse<UserRegister>>, t: Throwable) {
                 listener.onError(
                     RepositoryError(
-                        message = t.message ?: "Error inesperado",
-                        code = -1,
-                        source = Source.REMOTE
+                        "Unexpected Error",
+                        null
                     )
                 )
             }
 
         })
     }
-    fun loginUser(login: Login, listener: ResponseListener<Login>) {
+    fun loginUser(login: Login, listener: ResponseListener<UserRegister>) {
         val service = RetrofitService.instance
             .create(PostService::class.java)
             .loginUser(login)
 
-        service.enqueue(object : Callback<Login> {
-
-            override fun onResponse(call: Call<Login>, response: Response<Login>) {
-                val createdPost = response.body()
-                if (response.isSuccessful && createdPost != null) {
+        service.enqueue(object: Callback<RepositoryResponse<UserRegister>> {
+            override fun onResponse(
+                call: Call<RepositoryResponse<UserRegister>>,
+                response: Response<RepositoryResponse<UserRegister>>
+            ) {
+                val callResponse = response.body()
+                if (response.isSuccessful && null != callResponse) {
                     listener.onResponse(
                         RepositoryResponse(
-                            data = createdPost,
-                            source = Source.REMOTE
+                            callResponse.success,
+                            callResponse.data,
+                            callResponse.message,
+                            null
                         )
                     )
                 } else {
                     listener.onError(
                         RepositoryError(
-                            message = "El servidor rechazó la solicitud",
-                            code = response.code(),
-                            source = Source.REMOTE
+                            callResponse?.message ?: run { "Unexpected Error"},
+                            callResponse?.errors
                         )
                     )
                 }
             }
 
-            override fun onFailure(call: Call<Login>, t: Throwable) {
+            override fun onFailure(call: Call<RepositoryResponse<UserRegister>>, t: Throwable) {
                 listener.onError(
                     RepositoryError(
-                        message = t.message ?: "Error inesperado",
-                        code = -1,
-                        source = Source.REMOTE
+                        "Unexpected Error",
+                        null
                     )
                 )
             }

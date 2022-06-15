@@ -8,4 +8,8 @@
     <string name="redirect">Ya tienes cuenta? Ingresa!</string>
     <string name="login">Login</string>
     <string name="sing_up">No tienes cuenta? Registrate!</string>
+    <string name="tituloError">Error</string>
+    <string name="bodyError">Usuario no registrado, vuelva a intentarlo.</string>
+    <string name="loginError">Usuario no encontrado, vuelva a intentarlo.</string>
+    <string name="botonError">Ok</string>
 </resources>
