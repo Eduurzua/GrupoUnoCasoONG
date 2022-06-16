@@ -61,7 +61,6 @@ class FragmentLogin : Fragment() {
                     binding.tiPassword.editText?.text.toString()
                 )
             )
-
                 viewModel.error.observe(viewLifecycleOwner) { response ->
                     if (response != null) {
                         DialogFragment(getString(R.string.loginError), fragmentContext).show(
@@ -70,17 +69,6 @@ class FragmentLogin : Fragment() {
                         )
                     }
                 }
-
-
-            viewModel.error.observe(viewLifecycleOwner) { response ->
-                if (response != null) {
-                    DialogFragment(getString(R.string.loginError), fragmentContext).show(
-                        childFragmentManager,
-                        DialogFragment.TAG
-                    )
-                    viewModel.clearTextLogin()
-                }
-            }
         }
         return binding.root
     }
