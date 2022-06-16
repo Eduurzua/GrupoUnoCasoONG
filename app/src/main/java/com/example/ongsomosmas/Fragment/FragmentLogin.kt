@@ -23,7 +23,6 @@ class FragmentLogin : Fragment() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: MainViewModel by viewModels(factoryProducer = { VideModelFactory() })
-    private val loginViewModel: LogInViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,14 +42,14 @@ class FragmentLogin : Fragment() {
         /*Boton login inactivo*/
         binding.btnLogin.isEnabled = false
         /*observando campos email y password en caso de cambios*/
-        binding.tiEmail.addOnEditTextAttachedListener  {
-            loginViewModel.validate(email, password)
+        binding.tiEmail.editText?.addTextChangedListener  {
+            viewModel.validate(email, password)
         }
-        binding.tiPassword.addOnEditTextAttachedListener  {
-            loginViewModel.validate(email, password)
+        binding.tiPassword.editText?.addTextChangedListener  {
+            viewModel.validate(email, password)
         }
         /*observando viewmodel para bloquear o desbloquear boton*/
-        loginViewModel.enableButton.observe(viewLifecycleOwner){ value ->
+        viewModel.enableButton.observe(viewLifecycleOwner){ value ->
             binding.btnLogin.isEnabled = value
         }
 
