@@ -13,9 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
-    <style name="Theme.OngSomosMas.NoActionBar">
+    <style name="Theme.OngSomosMas.Splash" parent="Theme.OngSomosMas">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 </resources>

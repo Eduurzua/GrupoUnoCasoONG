@@ -1,5 +1,7 @@
 package com.example.ongsomosmas.views
 
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ongsomosmas.Model.*
@@ -10,17 +12,20 @@ import com.example.ongsomosmas.Post.ResponseListener
 import com.example.ongsomosmas.databinding.ActivityLoginBinding
 import com.example.ongsomosmas.databinding.ActivitySignUpBinding
 
+
 class MainViewModel(
-    private val repository: Repository
+    private val repository: Repository,
+
 ): ViewModel() {
 
     private lateinit var bindingSignUp : ActivitySignUpBinding
     private lateinit var bindingLogin : ActivityLoginBinding
-    val success = MutableLiveData<Boolean>(false)
+    val success = MutableLiveData(false)
     val message = MutableLiveData<String>(null)
     val user = MutableLiveData<User>(null)
-    val token = MutableLiveData<String>(null)
     val error = MutableLiveData<Errors?>(null)
+    val changeText = MutableLiveData<Boolean>(false)
+
 
     fun registerUser(newRegister: Register) {
         repository.registerUser(newRegister,object: ResponseListener<UserRegister> {
@@ -31,7 +36,6 @@ class MainViewModel(
                 success.value = response.success
                 message.value = response.message
                 user.value = response.data.user
-                token.value = response.data.token
             }
 
             override fun onError(repositoryError: RepositoryError) {
@@ -52,7 +56,6 @@ class MainViewModel(
                 success.value = response.success
                 message.value = response.message
                 user.value = response.data.user
-                token.value = response.data.token
             }
 
             override fun onError(repositoryError: RepositoryError) {
@@ -64,16 +67,7 @@ class MainViewModel(
         })
     }
 
-    fun clearTextSignUp(){
-        bindingSignUp.tiPassword.editText?.text?.clear()
-        bindingSignUp.tiEmail.editText?.text?.clear()
-        bindingSignUp.tiPassword.editText?.text?.clear()
-        bindingSignUp.tiRepeatPassword.editText?.text?.clear()
-    }
 
-    fun clearTextLogin(){
-        bindingLogin.tiPassword.editText?.text?.clear()
-        bindingLogin.tiEmail.editText?.text?.clear()
-    }
+
 
 }

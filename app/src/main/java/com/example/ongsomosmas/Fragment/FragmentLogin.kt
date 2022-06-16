@@ -62,9 +62,15 @@ class FragmentLogin : Fragment() {
                 )
             )
 
-            viewModel.success.observe(viewLifecycleOwner) { response ->
-            //TO DO
-            }
+                viewModel.error.observe(viewLifecycleOwner) { response ->
+                    if (response != null) {
+                        DialogFragment(getString(R.string.loginError), fragmentContext).show(
+                            childFragmentManager,
+                            DialogFragment.TAG
+                        )
+                    }
+                }
+
 
             viewModel.error.observe(viewLifecycleOwner) { response ->
                 if (response != null) {
