@@ -2,6 +2,7 @@ package com.example.ongsomosmas.views
 
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ongsomosmas.Model.*
@@ -11,6 +12,7 @@ import com.example.ongsomosmas.Post.RepositoryResponse
 import com.example.ongsomosmas.Post.ResponseListener
 import com.example.ongsomosmas.databinding.ActivityLoginBinding
 import com.example.ongsomosmas.databinding.ActivitySignUpBinding
+import java.util.regex.Pattern
 
 
 class MainViewModel(
@@ -25,6 +27,7 @@ class MainViewModel(
     val user = MutableLiveData<User>(null)
     val error = MutableLiveData<Errors?>(null)
     val changeText = MutableLiveData<Boolean>(false)
+    val enableButton = MutableLiveData<Boolean>(false)
 
 
     fun registerUser(newRegister: Register) {
@@ -67,7 +70,29 @@ class MainViewModel(
         })
     }
 
+    private fun validateEmail(email: String): Boolean {
+        return if (email.isEmpty()) {
+            false
+        } else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
+    }
 
+    private fun validatePassword(password: String): Boolean {
+        val passwordRegex = Pattern.compile(
+            "^" +
+                    "(?=.*[0-9])" +          //al menos 1 dígito
+                    "(?=.*[A-Z])" +          //al menos una Mayúscula
+                    ".{8,}" +                //minimo 8 de largo
+                    "$"
+        )
+        return if (password.isEmpty()) {
+            false
+        } else passwordRegex.matcher(password).matches()
+    }
+
+    fun validate(email: String, password: String){
+        val respuesta = validateEmail(email) && validatePassword(password)
+        enableButton.value = !respuesta
+    }
 
 
 }
