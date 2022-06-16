@@ -23,8 +23,7 @@ class FragmentLogin : Fragment() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: MainViewModel by viewModels(factoryProducer = { VideModelFactory() })
-
-    val result: Boolean = false
+    private val loginViewModel: LogInViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,75 +37,45 @@ class FragmentLogin : Fragment() {
             findNavController().navigate(R.id.action_login_to_signUp)
         }
 
+        val email = binding.tiEmail.editText?.text.toString()
+        val password = binding.tiPassword.editText?.text.toString()
+
+        /*Boton login inactivo*/
+        binding.btnLogin.isEnabled = false
+        /*observando campos email y password en caso de cambios*/
+        binding.tiEmail.addOnEditTextAttachedListener  {
+            loginViewModel.validate(email, password)
+        }
+        binding.tiPassword.addOnEditTextAttachedListener  {
+            loginViewModel.validate(email, password)
+        }
+        /*observando viewmodel para bloquear o desbloquear boton*/
+        loginViewModel.enableButton.observe(viewLifecycleOwner){ value ->
+            binding.btnLogin.isEnabled = value
+        }
 
         binding.btnLogin.setOnClickListener {
-            if (validate()) {
-                viewModel.loginUser(
-                    Login(
-                        binding.tiEmail.editText?.text.toString(),
-                        binding.tiPassword.editText?.text.toString()
-                    )
+            viewModel.loginUser(
+                Login(
+                    binding.tiEmail.editText?.text.toString(),
+                    binding.tiPassword.editText?.text.toString()
                 )
+            )
 
-                viewModel.success.observe(viewLifecycleOwner) { response ->
-                    //TO DO
-                }
-                viewModel.error.observe(viewLifecycleOwner) { response ->
-                    if (response != null) {
-                        DialogFragment(getString(R.string.loginError), fragmentContext).show(
-                            childFragmentManager,
-                            DialogFragment.TAG
-                        )
-                        viewModel.clearTextLogin()
-                    }
-                }
-            } else {
-                Toast.makeText(context, "Error de login", Toast.LENGTH_SHORT).show()
+            viewModel.success.observe(viewLifecycleOwner) { response ->
+            //TO DO
             }
 
+            viewModel.error.observe(viewLifecycleOwner) { response ->
+                if (response != null) {
+                    DialogFragment(getString(R.string.loginError), fragmentContext).show(
+                        childFragmentManager,
+                        DialogFragment.TAG
+                    )
+                    viewModel.clearTextLogin()
+                }
+            }
         }
         return binding.root
-    }
-
-    private fun validate(): Boolean {
-        val result = arrayOf(validateEmail(), validatePassword())
-        return false !in result
-    }
-
-    private fun validateEmail(): Boolean {
-        val email = binding.tiEmail.editText?.text.toString()
-        return if (email.isEmpty()) {
-            binding.tiEmail.error = "Campo email no puede estar vacío"
-            false
-        } else if (!PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tiEmail.error = "Campo email inválido"
-            false
-        } else {
-            binding.tiEmail.error = null
-            true
-        }
-    }
-
-    private fun validatePassword(): Boolean {
-        val password = binding.tiPassword.editText?.text.toString()
-        val passwordRegex = Pattern.compile(
-            "^" +
-                    "(?=.*[0-9])" +          //al menos 1 dígito
-                    "(?=.*[A-Z])" +          //al menos una minúscula
-                    "(?=.*[@#$%^&+=!])" +    //al menos un simbolo especial
-                    "(?=\\S+$)" +            //sin espacios
-                    ".{8,}" +                //minimo 8 de largo
-                    "$"
-        )
-        return if (password.isEmpty()) {
-            binding.tiPassword.error = "Campo contraseña no puede estar vacío"
-            false
-        } else if (!passwordRegex.matcher(password).matches()) {
-            binding.tiPassword.error = "La contraseña es inválida"
-            false
-        } else {
-            binding.tiPassword.error = null
-            true
-        }
     }
 }
