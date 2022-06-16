@@ -57,7 +57,6 @@ class FragmentLogin : Fragment() {
                             childFragmentManager,
                             DialogFragment.TAG
                         )
-                        viewModel.clearTextLogin()
                     }
                 }
             } else {
