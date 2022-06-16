@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.util.PatternsCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.ongsomosmas.Model.Login
-import com.example.ongsomosmas.Model.Register
 import com.example.ongsomosmas.R
 import com.example.ongsomosmas.databinding.ActivityLoginBinding
 import com.example.ongsomosmas.views.MainViewModel
@@ -53,9 +51,9 @@ class FragmentLogin : Fragment() {
                 }
                 viewModel.error.observe(viewLifecycleOwner) { response ->
                     if (response != null) {
-                        DialogFragment(getString(R.string.loginError), fragmentContext).show(
+                        FragmentDialog(getString(R.string.loginError), fragmentContext).show(
                             childFragmentManager,
-                            DialogFragment.TAG
+                            FragmentDialog.TAG
                         )
                     }
                 }
