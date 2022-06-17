@@ -1,7 +1,5 @@
 package com.example.ongsomosmas.views
 
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,14 +18,12 @@ class MainViewModel(
 
 ): ViewModel() {
 
-    private lateinit var bindingSignUp : ActivitySignUpBinding
-    private lateinit var bindingLogin : ActivityLoginBinding
     val success = MutableLiveData(false)
     val message = MutableLiveData<String>(null)
     val user = MutableLiveData<User>(null)
     val error = MutableLiveData<Errors?>(null)
-    val changeText = MutableLiveData<Boolean>(false)
     val enableButton = MutableLiveData<Boolean>(false)
+    val enableRegister= MutableLiveData<Boolean>(false)
 
 
     fun registerUser(newRegister: Register) {
@@ -76,6 +72,14 @@ class MainViewModel(
         } else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    private fun samePassword(password: String, passwordRepeat: String): Boolean {
+        return password == passwordRepeat
+    }
+
+    private fun nameLength(name: String): Boolean {
+        return name.length > 6
+    }
+
     private fun validatePassword(password: String): Boolean {
         val passwordRegex = Pattern.compile(
             "^" +
@@ -92,6 +96,11 @@ class MainViewModel(
     fun validate(email: String, password: String){
         val respuesta = validateEmail(email) && validatePassword(password)
         enableButton.value = !respuesta
+    }
+
+    fun validateRegister(email: String, password: String, passwordRepeat: String, name: String){
+        val response = validateEmail(email) && validatePassword(password) && samePassword(password,passwordRepeat) && nameLength(name)
+        enableRegister.value = !response
     }
 
 

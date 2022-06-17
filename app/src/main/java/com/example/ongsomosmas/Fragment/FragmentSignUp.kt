@@ -6,7 +6,9 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,6 +37,26 @@ class FragmentSignUp : Fragment() {
             findNavController().navigateUp()
         }
 
+        val name = binding.tiNameLastname.editText?.text.toString()
+        val email = binding.tiEmail.editText?.text.toString()
+        val password = binding.tiPassword.editText?.text.toString()
+        val passwordRepeat = binding.tiRepeatPassword.editText?.text.toString()
+
+        /*Boton login inactivo*/
+        binding.btRegisterButton.isEnabled = false
+        /*observando campos email y password en caso de cambios*/
+        binding.tiEmail.editText?.addTextChangedListener  {
+            viewModel.validateRegister(email, password,passwordRepeat,name)
+        }
+        binding.tiPassword.editText?.addTextChangedListener  {
+            viewModel.validateRegister(email, password,passwordRepeat,name)
+        }
+
+        /*observando viewmodel para bloquear o desbloquear boton*/
+        viewModel.enableRegister.observe(viewLifecycleOwner){ value ->
+            binding.btRegisterButton.isEnabled = value
+        }
+
         binding.btRegisterButton.setOnClickListener {
 
             viewModel.registerUser(
@@ -46,10 +68,12 @@ class FragmentSignUp : Fragment() {
             )
 
             viewModel.success.observe(viewLifecycleOwner) { response ->
-                //Hacer algo
+                if(response !== null){
+                Toast.makeText(context, "Registrado", Toast.LENGTH_SHORT).show()
+                }
             }
             viewModel.error.observe(viewLifecycleOwner) { response ->
-                if (response != null) {
+                if (response == null) {
                     FragmentDialog(getString(R.string.bodyError), fragmentContext).show(
                         childFragmentManager,
                         FragmentDialog.TAG
@@ -144,7 +168,7 @@ class FragmentSignUp : Fragment() {
 
         return binding.root
     }
-        fun clearTextSignUp() {
+        private fun clearTextSignUp() {
             binding.tiNameLastname.editText?.text?.clear()
             binding.tiEmail.editText?.text?.clear()
             binding.tiPassword.editText?.text?.clear()
@@ -152,7 +176,7 @@ class FragmentSignUp : Fragment() {
         }
 
 
-        fun alertError() {
+        private fun alertError() {
             binding.tiNameLastname.error = "Error Last Name"
             binding.tiEmail.error = "Error Email"
             binding.tiPassword.error = "Error Pass"
