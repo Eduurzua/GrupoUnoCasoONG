@@ -44,17 +44,38 @@ class FragmentSignUp : Fragment() {
 
         /*Boton login inactivo*/
         binding.btRegisterButton.isEnabled = false
+
         /*observando campos email y password en caso de cambios*/
         binding.tiEmail.editText?.addTextChangedListener  {
-            viewModel.validateRegister(email, password,passwordRepeat,name)
+            viewModel.validateRegister(binding.tiEmail.editText?.text.toString(),
+                binding.tiPassword.editText?.text.toString(),
+                binding.tiRepeatPassword.editText?.text.toString(),
+                binding.tiNameLastname.editText?.text.toString())
         }
         binding.tiPassword.editText?.addTextChangedListener  {
-            viewModel.validateRegister(email, password,passwordRepeat,name)
+            viewModel.validateRegister(binding.tiEmail.editText?.text.toString(),
+                binding.tiPassword.editText?.text.toString(),
+                binding.tiRepeatPassword.editText?.text.toString(),
+                binding.tiNameLastname.editText?.text.toString())
         }
 
         /*observando viewmodel para bloquear o desbloquear boton*/
         viewModel.enableRegister.observe(viewLifecycleOwner){ value ->
             binding.btRegisterButton.isEnabled = value
+        }
+
+        binding.tiPassword.editText?.addTextChangedListener{
+            viewModel.samePasswordRepeat(binding.tiPassword.editText?.text.toString().trim(),binding.tiRepeatPassword.editText?.text.toString().trim())}
+
+        binding.tiRepeatPassword.editText?.addTextChangedListener{
+            viewModel.samePasswordRepeat(binding.tiPassword.editText?.text.toString().trim(),binding.tiRepeatPassword.editText?.text.toString().trim())}
+
+
+        /*observando password para que sean iguales*/
+        viewModel.samePassword.observe(viewLifecycleOwner){ value ->
+            println("valor password  =" + value)
+            if(value) {binding.tiRepeatPassword.error = ""
+            }else binding.tiRepeatPassword.error = "Passwords are not the same"
         }
 
         binding.btRegisterButton.setOnClickListener {

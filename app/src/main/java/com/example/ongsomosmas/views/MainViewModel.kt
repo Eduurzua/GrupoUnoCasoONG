@@ -8,8 +8,6 @@ import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
 import com.example.ongsomosmas.Post.ResponseListener
-import com.example.ongsomosmas.databinding.ActivityLoginBinding
-import com.example.ongsomosmas.databinding.ActivitySignUpBinding
 import java.util.regex.Pattern
 
 
@@ -23,7 +21,8 @@ class MainViewModel(
     val user = MutableLiveData<User>(null)
     val error = MutableLiveData<Errors?>(null)
     val enableButton = MutableLiveData<Boolean>(false)
-    val enableRegister= MutableLiveData<Boolean>(false)
+    val enableRegister = MutableLiveData<Boolean>(false)
+    val samePassword = MutableLiveData<Boolean>(true)
 
 
     fun registerUser(newRegister: Register) {
@@ -72,10 +71,6 @@ class MainViewModel(
         } else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    private fun samePassword(password: String, passwordRepeat: String): Boolean {
-        return password == passwordRepeat
-    }
-
     private fun nameLength(name: String): Boolean {
         return name.length > 6
     }
@@ -103,5 +98,12 @@ class MainViewModel(
         enableRegister.value = !response
     }
 
+    fun samePassword(password: String, passwordRepeat: String): Boolean {
+        return (password == passwordRepeat)
+    }
 
+    fun samePasswordRepeat(password: String, passwordRepeat: String) {
+             samePassword.value = (password.isNullOrEmpty() && passwordRepeat.isNullOrEmpty())
+             || (password == passwordRepeat)
+    }
 }
