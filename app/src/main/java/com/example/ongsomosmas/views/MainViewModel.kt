@@ -45,6 +45,7 @@ class MainViewModel(
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
                 error.value = repositoryError.errors
                 println("Mensaje Error : " + message)
+                println(error.value)
             }
 
         })
