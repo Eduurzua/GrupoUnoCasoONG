@@ -37,23 +37,35 @@ class FragmentSignUp : Fragment() {
             findNavController().navigateUp()
         }
 
-        val name = binding.tiNameLastname.editText?.text.toString()
-        val email = binding.tiEmail.editText?.text.toString()
-        val password = binding.tiPassword.editText?.text.toString()
-        val passwordRepeat = binding.tiRepeatPassword.editText?.text.toString()
-
         /*Boton login inactivo*/
         binding.btRegisterButton.isEnabled = false
 
-        /*observando campos email y password en caso de cambios*/
+        /*Validando cada campo del register*/
+        binding.tiNameLastname.editText?.addTextChangedListener  {
+            viewModel.validateRegister(
+                binding.tiEmail.editText?.text.toString(),
+                    binding.tiPassword.editText?.text.toString(),
+                    binding.tiRepeatPassword.editText?.text.toString(),
+                    binding.tiNameLastname.editText?.text.toString())
+        }
         binding.tiEmail.editText?.addTextChangedListener  {
-            viewModel.validateRegister(binding.tiEmail.editText?.text.toString(),
+            viewModel.validateRegister(
+                binding.tiEmail.editText?.text.toString(),
                 binding.tiPassword.editText?.text.toString(),
                 binding.tiRepeatPassword.editText?.text.toString(),
                 binding.tiNameLastname.editText?.text.toString())
         }
         binding.tiPassword.editText?.addTextChangedListener  {
-            viewModel.validateRegister(binding.tiEmail.editText?.text.toString(),
+            viewModel.validateRegister(
+                binding.tiEmail.editText?.text.toString(),
+                binding.tiPassword.editText?.text.toString(),
+                binding.tiRepeatPassword.editText?.text.toString(),
+                binding.tiNameLastname.editText?.text.toString())
+        }
+
+        binding.tiRepeatPassword.editText?.addTextChangedListener  {
+            viewModel.validateRegister(
+                binding.tiEmail.editText?.text.toString(),
                 binding.tiPassword.editText?.text.toString(),
                 binding.tiRepeatPassword.editText?.text.toString(),
                 binding.tiNameLastname.editText?.text.toString())
@@ -61,7 +73,8 @@ class FragmentSignUp : Fragment() {
 
         /*observando viewmodel para bloquear o desbloquear boton*/
         viewModel.enableRegister.observe(viewLifecycleOwner){ value ->
-            binding.btRegisterButton.isEnabled = value
+            if(value){
+            binding.btRegisterButton.isEnabled = value}
         }
 
         binding.tiPassword.editText?.addTextChangedListener{
@@ -73,7 +86,6 @@ class FragmentSignUp : Fragment() {
 
         /*observando password para que sean iguales*/
         viewModel.samePassword.observe(viewLifecycleOwner){ value ->
-            println("valor password  =" + value)
             if(value) {binding.tiRepeatPassword.error = ""
             }else binding.tiRepeatPassword.error = "Passwords are not the same"
         }

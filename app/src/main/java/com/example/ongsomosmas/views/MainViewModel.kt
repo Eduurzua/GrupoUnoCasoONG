@@ -95,10 +95,10 @@ class MainViewModel(
 
     fun validateRegister(email: String, password: String, passwordRepeat: String, name: String){
         val response = validateEmail(email) && validatePassword(password) && samePassword(password,passwordRepeat) && nameLength(name)
-        enableRegister.value = !response
+        enableRegister.value = response
     }
 
-    fun samePassword(password: String, passwordRepeat: String): Boolean {
+    private fun samePassword(password: String, passwordRepeat: String): Boolean {
         return (password == passwordRepeat)
     }
 
