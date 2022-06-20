@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/FragmentLogin"
+    app:startDestination="@id/fragmentSplash"
     android:id="@+id/navigation">
     <fragment
         android:id="@+id/FragmentLogin"
@@ -22,5 +22,14 @@
         <action
             android:id="@+id/action_signUp_to_login"
             app:destination="@id/FragmentLogin"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSplash"
+        android:name="com.example.ongsomosmas.Fragment.FragmentSplash"
+        tools:layout="@layout/activity_splash"
+        android:label="FragmentSplash" >
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/FragmentLogin" />
     </fragment>
 </navigation>

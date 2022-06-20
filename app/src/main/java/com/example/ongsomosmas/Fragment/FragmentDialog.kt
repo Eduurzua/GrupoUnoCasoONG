@@ -7,7 +7,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.ongsomosmas.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class DialogFragment(message: String, fragmentContext: Context?) : DialogFragment() {
+class FragmentDialog(message: String, fragmentContext: Context?) : DialogFragment() {
 
     private val alertMessage = message
     private val fragmentContext = fragmentContext as Context
