@@ -1,44 +1,61 @@
 package com.example.ongsomosmas.views
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.core.content.res.TypedArrayUtils
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.ongsomosmas.Model.*
 import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
 import com.example.ongsomosmas.Post.ResponseListener
+import com.example.ongsomosmas.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.regex.Pattern
 
 
 class MainViewModel(
     private val repository: Repository,
 
-): ViewModel() {
+    ): ViewModel() {
 
     val success = MutableLiveData(false)
     val message = MutableLiveData<String>(null)
     val user = MutableLiveData<User>(null)
-    val error = MutableLiveData<Errors?>(null)
+    val error = MutableLiveData<String?>(null)
     val enableButton = MutableLiveData<Boolean>(false)
     val enableRegister = MutableLiveData<Boolean>(false)
     val samePassword = MutableLiveData<Boolean>(true)
+    val token = MutableLiveData<String?>(null)
+   // val sharedPreferences: SharedPreferences? = application.getSharedPreferences(R.string.tokenFile.toString(), Context.MODE_PRIVATE)
 
+
+  //  init {
+  //      token.value = sharedPreferences?.getString(R.string.tokenValue.toString(), "")
+  //  }
 
     fun registerUser(newRegister: Register) {
         repository.registerUser(newRegister,object: ResponseListener<UserRegister> {
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
-                val postResponse = response.data
-                println("Register : " + postResponse)
+    //                          val editor = sharedPreferences?.edit()
                 success.value = response.success
                 message.value = response.message
                 user.value = response.data.user
+                token.value = response.data.token
+     //           editor?.putString(R.string.tokenValue.toString(),token.value.toString())
+                //           editor?.apply()
+
             }
 
             override fun onError(repositoryError: RepositoryError) {
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
-                error.value = repositoryError.errors
+                error.value = message
                 println("Mensaje Error : " + message)
             }
 
@@ -49,17 +66,26 @@ class MainViewModel(
         repository.loginUser(newLogin,object: ResponseListener<UserRegister> {
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
-                val postResponse = response.data
-                println("Login : " + postResponse)
+                println("Login")
+    //            val editor = sharedPreferences?.edit()
                 success.value = response.success
                 message.value = response.message
                 user.value = response.data.user
+                token.value = response.data.token
+     //           editor?.putString(R.string.tokenValue.toString(),token.value.toString())
+     //           editor?.apply()
+                println("success.value   : "+ success.value )
+                println("message.value   : "+ message.value )
+                println("user.value   : "+ user.value )
+                println("token.value   : "+ token.value)
             }
 
             override fun onError(repositoryError: RepositoryError) {
+                println("Login Error")
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
-                error.value = repositoryError.errors
+                error.value = message
                 println("Mensaje Error : " + message)
+                println("valor Error : " + error.value)
             }
 
         })
@@ -90,7 +116,7 @@ class MainViewModel(
 
     fun validate(email: String, password: String){
         val respuesta = validateEmail(email) && validatePassword(password)
-        enableButton.value = !respuesta
+        enableButton.value = respuesta
     }
 
     fun validateRegister(email: String, password: String, passwordRepeat: String, name: String){
@@ -106,4 +132,6 @@ class MainViewModel(
              samePassword.value = (password.isNullOrEmpty() && passwordRepeat.isNullOrEmpty())
              || (password == passwordRepeat)
     }
+
+
 }

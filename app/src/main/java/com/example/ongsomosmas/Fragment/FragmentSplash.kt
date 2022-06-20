@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ongsomosmas.R
@@ -24,6 +25,10 @@ class FragmentSplash : Fragment() {
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController().navigate(R.id.action_splash_to_login)
         },5000)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigateUp()
+        }
 
         return view
     }

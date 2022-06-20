@@ -8,10 +8,19 @@
     <string name="redirect">Ya tienes cuenta? Ingresa!</string>
     <string name="login">Login</string>
     <string name="sing_up">No tienes cuenta? Registrate!</string>
-    <string name="tituloError">Error</string>
-    <string name="bodyError">Usuario no registrado, vuelva a intentarlo.</string>
-    <string name="loginError">Usuario no encontrado, vuelva a intentarlo.</string>
-    <string name="botonError">Ok</string>
+    <string name="titleError">Error</string>
+    <string name="titleRegister">Usuario Registrado</string>
+    <string name="bodyErrorRegister">Usuario no registrado, vuelva a intentarlo.</string>
+    <string name="bodyRegisterOK">User was succesfully register</string>
+    <string name="bodyErrorLogin">Usuario no encontrado, vuelva a intentarlo.</string>
+    <string name="buttonOk">Ok</string>
+    <string name="notSamePassword">Passwords are not the same></string>
+    <string name="wrongName">Wrong Name</string>
+    <string name="wrongEmail">Wrong Email</string>
+    <string name="wrongPassword">Wrong Password</string>
+    <string name="wrongPasswordRepeat">Wrong Repeat Pass"</string>
+    <string name="tokenFile">token_file</string>
+    <string name="tokenValue">tokenValue</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

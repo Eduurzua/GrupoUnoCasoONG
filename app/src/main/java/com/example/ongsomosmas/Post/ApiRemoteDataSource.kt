@@ -21,22 +21,24 @@ class ApiRemoteDataSource {
                 response: Response<RepositoryResponse<UserRegister>>
             ) {
                 val callResponse = response.body()
-                if (response.isSuccessful && null != callResponse) {
-                    listener.onResponse(
-                        RepositoryResponse(
-                            callResponse.success,
-                            callResponse.data,
-                            callResponse.message,
-                            null
+                if (callResponse != null) {
+                    if (response.isSuccessful && callResponse.success) {
+                        listener.onResponse(
+                            RepositoryResponse(
+                                callResponse.success,
+                                callResponse.data,
+                                callResponse.message,
+                                callResponse.data.token
+                            )
                         )
-                    )
-                } else {
-                    listener.onError(
-                        RepositoryError(
-                            callResponse?.message ?: run { "Unexpected Error" },
-                            callResponse?.errors
+                    } else {
+                        listener.onError(
+                            RepositoryError(
+                                message = "El servidor rechazó la solicitud",
+                                errors = response.code(),
+                            )
                         )
-                    )
+                    }
                 }
             }
 
@@ -44,7 +46,7 @@ class ApiRemoteDataSource {
                 listener.onError(
                     RepositoryError(
                         "Unexpected Error",
-                        null
+                        errors = -1,
                     )
                 )
             }
@@ -63,11 +65,12 @@ class ApiRemoteDataSource {
                 response: Response<RepositoryResponse<UserRegister>>
             ) {
                 val callResponse = response.body()
-                println("callResponse : " + callResponse)
+                println("callResponse Onresponse : " + callResponse)
                 println("success : " + callResponse?.success)
                 println("data : " + callResponse?.data)
                 println("message : " + callResponse?.message)
                 println("response.isSuccessful  : " + response.isSuccessful)
+                println("token   :"  + callResponse?.data?.token)
                 if (callResponse != null) {
                     if (response.isSuccessful && callResponse.success) {
                         println("Entro if successful  :")
@@ -76,7 +79,7 @@ class ApiRemoteDataSource {
                                 callResponse.success,
                                 callResponse.data,
                                 callResponse.message,
-                                null
+                                callResponse.data.token
                             )
                         )
 
@@ -85,8 +88,8 @@ class ApiRemoteDataSource {
                         println("Entro else de error  :")
                         listener.onError(
                             RepositoryError(
-                                callResponse?.message ?: run { "Unexpected Error" },
-                                callResponse?.errors
+                                message = "El servidor rechazó la solicitud",
+                                errors = response.code(),
                             )
                         )
                     }
@@ -95,10 +98,12 @@ class ApiRemoteDataSource {
             }
 
             override fun onFailure(call: Call<RepositoryResponse<UserRegister>>, t: Throwable) {
+                println("callResponse Onfailure : " + t)
+
                 listener.onError(
                     RepositoryError(
                         "Unexpected Error",
-                        null
+                        errors = -1,
                     )
                 )
             }
