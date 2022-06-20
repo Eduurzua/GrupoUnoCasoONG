@@ -23,8 +23,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class FragmentLogin : Fragment() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val viewModel: MainViewModel by viewModels(factoryProducer = { VideModelFactory() })
-    val sharedPreferences = context?.getSharedPreferences(R.string.tokenFile.toString(), Context.MODE_PRIVATE)
+    private val viewModel: MainViewModel by viewModels(factoryProducer = { VideModelFactory(this.requireContext()) })
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,6 @@ class FragmentLogin : Fragment() {
         binding.btSingUp.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_signUp)
         }
-
         /*Boton login inactivo*/
         binding.btnLogin.isEnabled = false
         /*observando campos email y password en caso de cambios*/
@@ -68,69 +67,67 @@ class FragmentLogin : Fragment() {
                 println("response observe  : " + response )
                 if (response) {
                     Toast.makeText(context, "Logeado", Toast.LENGTH_SHORT).show()
-                    val editor = sharedPreferences?.edit()
-                    editor?.putString(R.string.tokenValue.toString(),viewModel.token.toString())
-                    editor?.apply()
                 }
             }
             viewModel.error.observe(viewLifecycleOwner) {response ->
                 println("response observe error  : " + response )
                 if (response != null) {
                     dialogAlert(getString(R.string.bodyErrorLogin))
-                    binding.tiEmail.editText?.addTextChangedListener(object : TextWatcher {
-                        override fun beforeTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            count: Int,
-                            after: Int
-                        ) {
 
-                        }
-
-                        override fun onTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            before: Int,
-                            count: Int
-                        ) {
-                        }
-
-                        override fun afterTextChanged(s: Editable?) {
-
-                            binding.tiEmail.error = ""
-
-                        }
-
-                    })
-                    binding.tiPassword.editText?.addTextChangedListener(object : TextWatcher {
-                        override fun beforeTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            count: Int,
-                            after: Int
-                        ) {
-
-                        }
-
-                        override fun onTextChanged(
-                            s: CharSequence?,
-                            start: Int,
-                            before: Int,
-                            count: Int
-                        ) {
-                        }
-
-                        override fun afterTextChanged(s: Editable?) {
-
-                            binding.tiPassword.error = ""
-
-                        }
-
-                    })
                 }
             }
 
         }
+        binding.tiEmail.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                binding.tiEmail.error = ""
+
+            }
+
+        })
+        binding.tiPassword.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                binding.tiPassword.error = ""
+
+            }
+
+        })
 
         return binding.root
     }

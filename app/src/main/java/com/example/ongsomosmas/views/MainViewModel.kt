@@ -1,7 +1,9 @@
 package com.example.ongsomosmas.views
 
+import android.app.Application
 import android.content.Context
 import androidx.core.util.PatternsCompat
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ongsomosmas.Model.Login
@@ -16,7 +18,8 @@ import com.example.ongsomosmas.R
 import java.util.regex.Pattern
 
 
-class MainViewModel(private val repository: Repository) : ViewModel() {
+class MainViewModel(private val repository: Repository, context: Context) : ViewModel(
+)  {
 
     val success = MutableLiveData(false)
     val message = MutableLiveData<String>(null)
@@ -26,12 +29,12 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     val enableRegister = MutableLiveData<Boolean>(false)
     val samePassword = MutableLiveData<Boolean>(true)
     val token = MutableLiveData<String?>(null)
-    //val sharedPreferences = application.getSharedPreferences(R.string.tokenFile.toString(), Context.MODE_PRIVATE)
+    val sharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
 
 
-    // init {
-    //     token.value = sharedPreferences.getString(R.string.tokenValue.toString(), "")
-    // }
+     init {
+         token.value = sharedPreferences.getString(R.string.tokenValue.toString(), "")
+     }
 
     fun registerUser(newRegister: Register) {
         repository.registerUser(newRegister, object : ResponseListener<UserRegister> {
@@ -63,13 +66,13 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
                 println("Login")
-                //val editor = sharedPreferences.edit()
+                val editor = sharedPreferences.edit()
                 success.value = response.success
                 message.value = response.message
                 user.value = response.data.user
                 token.value = response.data.token
-                //editor.putString(R.string.tokenValue.toString(),token.value.toString())
-                //editor.apply()
+                editor.putString(R.string.tokenValue.toString(),token.value.toString())
+                editor.apply()
                 println("success.value   : " + success.value)
                 println("message.value   : " + message.value)
                 println("user.value   : " + user.value)
