@@ -1,28 +1,22 @@
 package com.example.ongsomosmas.views
 
-import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.core.content.res.TypedArrayUtils
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
-import com.example.ongsomosmas.Model.*
+import com.example.ongsomosmas.Model.Login
+import com.example.ongsomosmas.Model.Register
+import com.example.ongsomosmas.Model.User
+import com.example.ongsomosmas.Model.UserRegister
 import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
 import com.example.ongsomosmas.Post.ResponseListener
 import com.example.ongsomosmas.R
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.regex.Pattern
 
 
-class MainViewModel(
-    private val repository: Repository,
-
-    ): ViewModel() {
+class MainViewModel(private val repository: Repository) : ViewModel() {
 
     val success = MutableLiveData(false)
     val message = MutableLiveData<String>(null)
@@ -32,24 +26,25 @@ class MainViewModel(
     val enableRegister = MutableLiveData<Boolean>(false)
     val samePassword = MutableLiveData<Boolean>(true)
     val token = MutableLiveData<String?>(null)
-   // val sharedPreferences: SharedPreferences? = application.getSharedPreferences(R.string.tokenFile.toString(), Context.MODE_PRIVATE)
+    //val sharedPreferences = application.getSharedPreferences(R.string.tokenFile.toString(), Context.MODE_PRIVATE)
 
 
-  //  init {
-  //      token.value = sharedPreferences?.getString(R.string.tokenValue.toString(), "")
-  //  }
+    // init {
+    //     token.value = sharedPreferences.getString(R.string.tokenValue.toString(), "")
+    // }
 
     fun registerUser(newRegister: Register) {
-        repository.registerUser(newRegister,object: ResponseListener<UserRegister> {
+        repository.registerUser(newRegister, object : ResponseListener<UserRegister> {
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
-    //                          val editor = sharedPreferences?.edit()
                 success.value = response.success
                 message.value = response.message
                 user.value = response.data.user
                 token.value = response.data.token
-     //           editor?.putString(R.string.tokenValue.toString(),token.value.toString())
-                //           editor?.apply()
+                println("success.value   : " + success.value)
+                println("message.value   : " + message.value)
+                println("user.value   : " + user.value)
+                println("token.value   : " + token.value)
 
             }
 
@@ -57,27 +52,28 @@ class MainViewModel(
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
                 error.value = message
                 println("Mensaje Error : " + message)
+                println("valor Error : " + error.value)
             }
 
         })
     }
 
     fun loginUser(newLogin: Login) {
-        repository.loginUser(newLogin,object: ResponseListener<UserRegister> {
+        repository.loginUser(newLogin, object : ResponseListener<UserRegister> {
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
                 println("Login")
-    //            val editor = sharedPreferences?.edit()
+                //val editor = sharedPreferences.edit()
                 success.value = response.success
                 message.value = response.message
                 user.value = response.data.user
                 token.value = response.data.token
-     //           editor?.putString(R.string.tokenValue.toString(),token.value.toString())
-     //           editor?.apply()
-                println("success.value   : "+ success.value )
-                println("message.value   : "+ message.value )
-                println("user.value   : "+ user.value )
-                println("token.value   : "+ token.value)
+                //editor.putString(R.string.tokenValue.toString(),token.value.toString())
+                //editor.apply()
+                println("success.value   : " + success.value)
+                println("message.value   : " + message.value)
+                println("user.value   : " + user.value)
+                println("token.value   : " + token.value)
             }
 
             override fun onError(repositoryError: RepositoryError) {
@@ -114,13 +110,16 @@ class MainViewModel(
         } else passwordRegex.matcher(password).matches()
     }
 
-    fun validate(email: String, password: String){
+    fun validate(email: String, password: String) {
         val respuesta = validateEmail(email) && validatePassword(password)
         enableButton.value = respuesta
     }
 
-    fun validateRegister(email: String, password: String, passwordRepeat: String, name: String){
-        val response = validateEmail(email) && validatePassword(password) && samePassword(password,passwordRepeat) && nameLength(name)
+    fun validateRegister(email: String, password: String, passwordRepeat: String, name: String) {
+        val response = validateEmail(email) && validatePassword(password) && samePassword(
+            password,
+            passwordRepeat
+        ) && nameLength(name)
         enableRegister.value = response
     }
 
@@ -129,8 +128,8 @@ class MainViewModel(
     }
 
     fun samePasswordRepeat(password: String, passwordRepeat: String) {
-             samePassword.value = (password.isNullOrEmpty() && passwordRepeat.isNullOrEmpty())
-             || (password == passwordRepeat)
+        samePassword.value = (password.isNullOrEmpty() && passwordRepeat.isNullOrEmpty())
+                || (password == passwordRepeat)
     }
 
 

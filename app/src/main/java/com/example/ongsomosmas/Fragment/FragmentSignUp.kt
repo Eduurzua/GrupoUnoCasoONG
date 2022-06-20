@@ -119,12 +119,14 @@ class FragmentSignUp : Fragment() {
             )
 
             viewModel.success.observe(viewLifecycleOwner) { response ->
-                if (response !== null) {
+                println("Success Observe  : " + response)
+                if (response) {
                     dialogAlertRegister(getString(R.string.bodyRegisterOK))
                 }
             }
             viewModel.error.observe(viewLifecycleOwner) { response ->
-                if (response == null) {
+                println("Error Observe  : " + response)
+                if (response != null) {
                     dialogAlert(getString(R.string.bodyErrorRegister))
 
                     binding.tiNameLastname.editText?.addTextChangedListener(object : TextWatcher {

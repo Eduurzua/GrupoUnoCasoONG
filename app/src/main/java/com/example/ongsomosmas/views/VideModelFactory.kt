@@ -1,10 +1,10 @@
 package com.example.ongsomosmas.views
 
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ongsomosmas.Post.ApiRemoteDataSource
 import com.example.ongsomosmas.Post.Repository
-import android.app.Application
 
 class VideModelFactory: ViewModelProvider.Factory {
 

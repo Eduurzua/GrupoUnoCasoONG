@@ -21,8 +21,15 @@ class ApiRemoteDataSource {
                 response: Response<RepositoryResponse<UserRegister>>
             ) {
                 val callResponse = response.body()
+                println("callResponse Onresponse : " + callResponse)
+                println("success : " + callResponse?.success)
+                println("data : " + callResponse?.data)
+                println("message : " + callResponse?.message)
+                println("response.isSuccessful  : " + response.isSuccessful)
+                println("token   :"  + callResponse?.data?.token)
                 if (callResponse != null) {
                     if (response.isSuccessful && callResponse.success) {
+                        println("Entro if successful  :")
                         listener.onResponse(
                             RepositoryResponse(
                                 callResponse.success,
@@ -32,6 +39,7 @@ class ApiRemoteDataSource {
                             )
                         )
                     } else {
+                        println("Entro else de error  :")
                         listener.onError(
                             RepositoryError(
                                 message = "El servidor rechazó la solicitud",
@@ -43,6 +51,7 @@ class ApiRemoteDataSource {
             }
 
             override fun onFailure(call: Call<RepositoryResponse<UserRegister>>, t: Throwable) {
+                println("callResponse Onfailure : " + t)
                 listener.onError(
                     RepositoryError(
                         "Unexpected Error",

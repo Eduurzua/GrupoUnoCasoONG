@@ -1,5 +1,6 @@
 package com.example.ongsomosmas.Fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,6 +24,7 @@ class FragmentLogin : Fragment() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: MainViewModel by viewModels(factoryProducer = { VideModelFactory() })
+    val sharedPreferences = context?.getSharedPreferences(R.string.tokenFile.toString(), Context.MODE_PRIVATE)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,6 +68,9 @@ class FragmentLogin : Fragment() {
                 println("response observe  : " + response )
                 if (response) {
                     Toast.makeText(context, "Logeado", Toast.LENGTH_SHORT).show()
+                    val editor = sharedPreferences?.edit()
+                    editor?.putString(R.string.tokenValue.toString(),viewModel.token.toString())
+                    editor?.apply()
                 }
             }
             viewModel.error.observe(viewLifecycleOwner) {response ->
