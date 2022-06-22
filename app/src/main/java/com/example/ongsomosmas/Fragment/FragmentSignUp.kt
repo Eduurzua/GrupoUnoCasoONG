@@ -6,23 +6,21 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
-import com.example.ongsomosmas.Model.Register
+import com.example.ongsomosmas.Dto.Register
 import com.example.ongsomosmas.R
-import com.example.ongsomosmas.databinding.ActivitySignUpBinding
+import com.example.ongsomosmas.databinding.FragmentSignupBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FragmentSignUp : Fragment() {
 
-    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var binding: FragmentSignupBinding
     private val viewModel: MainViewModel by viewModels(
         factoryProducer = { VideModelFactory(requireContext()) }
     )
@@ -32,7 +30,7 @@ class FragmentSignUp : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ActivitySignUpBinding.inflate(inflater, container, false)
+        binding = FragmentSignupBinding.inflate(inflater, container, false)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().navigateUp()
@@ -233,8 +231,6 @@ class FragmentSignUp : Fragment() {
             }
 
         })
-
-
 
         return binding.root
     }
