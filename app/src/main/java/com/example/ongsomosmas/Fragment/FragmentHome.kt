@@ -1,7 +1,10 @@
 package com.example.ongsomosmas.Fragment
 
+import android.R
+import android.R.menu
 import android.os.Bundle
 import android.view.*
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ongsomosmas.databinding.ActivityHomeBinding
@@ -15,34 +18,38 @@ class FragmentHome : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        this.setHasOptionsMenu(true)
-
+    ): View {
         binding = ActivityHomeBinding.inflate(inflater, container, false)
-
-        /*Visibilidades de menu*/
-        binding.MenuButton.setOnClickListener() {
-            binding.menu.visibility = View.VISIBLE
-            binding.MenuButton.visibility = View.GONE
-        }
-        binding.iconClear.setOnClickListener() {
-            binding.menu.visibility = View.GONE
-            binding.MenuButton.visibility = View.VISIBLE
-        }
-
-        /*Opciones menu*/
-        binding.iconContact.setOnClickListener() {
-            Toast.makeText(context, "Redirigiendo a contactos", Toast.LENGTH_SHORT).show()
-        }
-        binding.iconNews.setOnClickListener() {
-            Toast.makeText(context, "Redirigiendo a novedades", Toast.LENGTH_SHORT).show()
-        }
-        binding.iconStaff.setOnClickListener() {
-            Toast.makeText(context, "Redirigiendo a Staff", Toast.LENGTH_SHORT).show()
-        }
-
-        /*ojo como vuelve hacia atrás cuando esté implementado*/
 
         return binding.root
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_popup , menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId;
+
+        if (id == R.id.nav_home){
+            Toast.makeText(context,"Redirigiendo al menu principal", Toast.LENGTH_SHORT).show()
+        }
+        if (id == R.id.nav_staff){
+            Toast.makeText(context,"Redirigiendo a contactos", Toast.LENGTH_SHORT).show()
+        }
+        if (id == R.id.nav_news){
+            Toast.makeText(context,"Redirigiendo a noticias", Toast.LENGTH_SHORT).show()
+        }
+        if (id == R.id.nav_contact){
+            Toast.makeText(context,"Redirigiendo a contacto", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
