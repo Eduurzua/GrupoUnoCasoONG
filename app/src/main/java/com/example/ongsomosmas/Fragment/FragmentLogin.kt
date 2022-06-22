@@ -34,7 +34,7 @@ class FragmentLogin : Fragment() {
         binding = ActivityLoginBinding.inflate(inflater, container, false)
 
         binding.btSingUp.setOnClickListener {
-            findNavController().navigate(R.id.action_login_to_signUp)
+            findNavController().navigate(R.id.action_login_to_contact)
         }
         /*Boton login inactivo*/
         binding.btnLogin.isEnabled = false

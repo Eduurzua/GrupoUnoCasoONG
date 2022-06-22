@@ -10,8 +10,8 @@
         tools:layout="@layout/activity_login"
         android:label="fragment start">
         <action
-            android:id="@+id/action_login_to_signUp"
-            app:destination="@id/FragmentSignUp"/>
+            android:id="@+id/action_login_to_contact"
+            app:destination="@id/FragmentContact"/>
     </fragment>
 
     <fragment
@@ -27,6 +27,15 @@
         android:id="@+id/fragmentSplash"
         android:name="com.example.ongsomosmas.Fragment.FragmentSplash"
         tools:layout="@layout/activity_splash"
+        android:label="FragmentSplash" >
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/FragmentLogin" />
+    </fragment>
+    <fragment
+        android:id="@+id/FragmentContact"
+        android:name="com.example.ongsomosmas.Fragment.FragmentContact"
+        tools:layout="@layout/activity_contact"
         android:label="FragmentSplash" >
         <action
             android:id="@+id/action_splash_to_login"
