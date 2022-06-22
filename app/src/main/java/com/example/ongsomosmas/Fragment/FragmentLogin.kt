@@ -1,6 +1,5 @@
 package com.example.ongsomosmas.Fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -34,7 +33,7 @@ class FragmentLogin : Fragment() {
         binding = ActivityLoginBinding.inflate(inflater, container, false)
 
         binding.btSingUp.setOnClickListener {
-            findNavController().navigate(R.id.action_login_to_contact)
+            findNavController().navigate(R.id.action_login_to_signUp)
         }
         /*Boton login inactivo*/
         binding.btnLogin.isEnabled = false

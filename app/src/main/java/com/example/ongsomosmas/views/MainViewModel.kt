@@ -118,6 +118,15 @@ class MainViewModel(private val repository: Repository, context: Context) : View
         enableButton.value = respuesta
     }
 
+    fun validateContact(nombreyApellido: String, email: String, mensaje: String ) {
+        val respuestaContact = validateEmail(email) && validateIsNull(nombreyApellido) && validateIsNull(mensaje)
+        enableButton.value = respuestaContact
+    }
+
+    private fun validateIsNull(content: String): Boolean {
+        return content.isNotEmpty()
+    }
+
     fun validateRegister(email: String, password: String, passwordRepeat: String, name: String) {
         val response = validateEmail(email) && validatePassword(password) && samePassword(
             password,
