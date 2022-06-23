@@ -1,13 +1,11 @@
-package com.example.ongsomosmas.Model
+package com.example.ongsomosmas.Dto
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Register(
-    @SerializedName("name")
-    val name: String,
+data class Login (
     @SerializedName("email")
     val email: String,
     @SerializedName("password")
-    val password: String
-)
+    val password: String,
+) : Serializable

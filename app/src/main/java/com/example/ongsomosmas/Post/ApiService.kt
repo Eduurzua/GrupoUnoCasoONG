@@ -1,11 +1,15 @@
 package com.example.ongsomosmas.Post
 
-import com.example.ongsomosmas.Model.Login
-import com.example.ongsomosmas.Model.Register
-import com.example.ongsomosmas.Model.UserRegister
+import android.telecom.CallScreeningService
+import com.example.ongsomosmas.Dto.Login
+import com.example.ongsomosmas.Dto.News
+import com.example.ongsomosmas.Dto.Register
+import com.example.ongsomosmas.Dto.UserRegister
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -14,4 +18,7 @@ interface ApiService {
 
     @POST("/api/login")
     fun loginUser(@Body login: Login): Call<RepositoryResponse<UserRegister>>
+
+    @GET("/api/news")
+    fun getNews(@Query("limit") limit : Int): Call<RepositoryResponse<List<News>>>
 }

@@ -1,20 +1,29 @@
 package com.example.ongsomosmas.Fragment
 
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import com.example.ongsomosmas.databinding.ActivityHomeBinding
-
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.ongsomosmas.R
+import com.example.ongsomosmas.databinding.FragmentHomeBinding
+import com.example.ongsomosmas.views.MainViewModel
+import com.example.ongsomosmas.views.VideModelFactory
 
 class FragmentHome : Fragment() {
 
-    private lateinit var binding: ActivityHomeBinding
-
+    private lateinit var binding: FragmentHomeBinding
+    private val viewModel: MainViewModel by viewModels(
+        factoryProducer = { VideModelFactory(requireContext()) }
+    )
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         this.setHasOptionsMenu(true)
 
@@ -41,7 +50,6 @@ class FragmentHome : Fragment() {
             Toast.makeText(context, "Redirigiendo a Staff", Toast.LENGTH_SHORT).show()
         }
 
-        /*ojo como vuelve hacia atrás cuando esté implementado*/
 
         return binding.root
     }

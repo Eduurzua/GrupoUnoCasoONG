@@ -1,15 +1,11 @@
 package com.example.ongsomosmas.views
 
-import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.core.util.PatternsCompat
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ongsomosmas.Model.Login
-import com.example.ongsomosmas.Model.Register
-import com.example.ongsomosmas.Model.User
-import com.example.ongsomosmas.Model.UserRegister
+import com.example.ongsomosmas.Dto.*
 import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
@@ -29,7 +25,8 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val enableRegister = MutableLiveData<Boolean>(false)
     val samePassword = MutableLiveData<Boolean>(true)
     val token = MutableLiveData<String?>(null)
-    val sharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
+    val news = MutableLiveData<List<News>>(null)
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
 
 
      init {
@@ -72,6 +69,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 user.value = response.data.user
                 token.value = response.data.token
                 editor.putString(R.string.tokenValue.toString(),token.value.toString())
+                editor.putString(R.string.tokenUser.toString(),user.value?.name.toString())
                 editor.apply()
                 println("success.value   : " + success.value)
                 println("message.value   : " + message.value)
@@ -85,6 +83,30 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 error.value = message
                 println("Mensaje Error : " + message)
                 println("valor Error : " + error.value)
+            }
+
+        })
+    }
+
+    fun getNews(limit: Int) {
+
+        error.value = null
+
+        repository.getNews(limit, object : ResponseListener<List<News>> {
+
+            override fun onResponse(response: RepositoryResponse<List<News>>) {
+                val postResponse = response.data
+                println("postResponse   : " +postResponse)
+                error.value = null
+                news.value = postResponse
+                println("news.value   : " +news.value)
+                println("news.value   : " )
+
+            }
+
+            override fun onError(repositoryError: RepositoryError) {
+                val message = "${repositoryError.message} (code: ${repositoryError.errors})"
+                error.value = message
             }
 
         })
@@ -144,5 +166,8 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 || (password == passwordRepeat)
     }
 
-
+    fun loadUser() : Boolean {
+        val preferences =  sharedPreferences.getString(R.string.tokenValue.toString(),"")
+        return !preferences.equals("")
+        }
 }
