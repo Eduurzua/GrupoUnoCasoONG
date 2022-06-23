@@ -26,6 +26,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val samePassword = MutableLiveData<Boolean>(true)
     val token = MutableLiveData<String?>(null)
     val news = MutableLiveData<List<News>>(null)
+    val members = MutableLiveData<List<Members>>(null)
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
 
 
@@ -84,6 +85,26 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 val postResponse = response.data
                 error.value = null
                 news.value = postResponse
+            }
+
+            override fun onError(repositoryError: RepositoryError) {
+                val message = "${repositoryError.message} (code: ${repositoryError.errors})"
+                error.value = message
+            }
+
+        })
+    }
+
+    fun getMembers(limit: Int) {
+
+        error.value = null
+
+        repository.getMembers(limit, object : ResponseListener<List<Members>> {
+
+            override fun onResponse(response: RepositoryResponse<List<Members>>) {
+                val postResponse = response.data
+                error.value = null
+                members.value = postResponse
             }
 
             override fun onError(repositoryError: RepositoryError) {

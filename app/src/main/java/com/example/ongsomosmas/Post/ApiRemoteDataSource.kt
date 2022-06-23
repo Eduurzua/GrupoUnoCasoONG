@@ -1,9 +1,6 @@
 package com.example.ongsomosmas.Post
 
-import com.example.ongsomosmas.Dto.Login
-import com.example.ongsomosmas.Dto.News
-import com.example.ongsomosmas.Dto.Register
-import com.example.ongsomosmas.Dto.UserRegister
+import com.example.ongsomosmas.Dto.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -137,6 +134,44 @@ class ApiRemoteDataSource {
                         errors = -1,
 
                     )
+                )
+            }
+
+        })
+    }
+
+    fun getMembers(limit: Int, listener: ResponseListener<List<Members>>) {
+        val service = RetrofitService.instance
+            .create(ApiService::class.java)
+            .getMembers(limit)
+
+        service.enqueue(object : Callback<RepositoryResponse<List<Members>>> {
+
+            override fun onResponse(call: Call<RepositoryResponse<List<Members>>>, response: Response<RepositoryResponse<List<Members>>>) {
+                val callResponse = response.body()
+                if (response.isSuccessful && callResponse != null) {
+                    listener.onResponse(
+                        callResponse
+                    )
+                } else {
+                    listener.onError(
+                        RepositoryError(
+                            message = "El servidor rechazó la solicitud",
+                            errors = response.code(),
+
+                            )
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<RepositoryResponse<List<Members>>>, t: Throwable) {
+                println(" onFailure a news")
+                listener.onError(
+                    RepositoryError(
+                        message = t.message ?: "Error inesperado",
+                        errors = -1,
+
+                        )
                 )
             }
 

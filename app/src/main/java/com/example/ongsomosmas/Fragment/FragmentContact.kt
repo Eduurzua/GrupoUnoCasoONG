@@ -51,7 +51,7 @@ class FragmentContact : Fragment() {
             findNavController().navigate(R.id.action_contact_to_news)
         }
         binding.iconStaff.setOnClickListener() {
-            Toast.makeText(context, "Redirigiendo a Staff", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_contact_to_members)
         }
 
         /*Boton enviar mensaje inactivo*/

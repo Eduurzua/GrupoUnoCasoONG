@@ -56,7 +56,7 @@ class FragmentNews : Fragment() {
             findNavController().navigate(R.id.action_news_to_home)
         }
         binding.iconStaff.setOnClickListener() {
-            Toast.makeText(context, "Redirigiendo a Staff", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_news_to_members)
         }
 
         /*viewModel.getNews(4)
