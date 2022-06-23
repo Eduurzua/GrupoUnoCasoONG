@@ -6,7 +6,7 @@ import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ongsomosmas.Dto.*
-import com.example.ongsomosmas.Model.PostMessage
+import com.example.ongsomosmas.Dto.PostMessage
 import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
@@ -29,7 +29,6 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val news = MutableLiveData<List<News>>(null)
     val members = MutableLiveData<List<Members>>(null)
     val new = MutableLiveData<News>(null)
-    val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
     val postMessage = MutableLiveData<PostMessage?>(null)
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
 
@@ -126,30 +125,6 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 val postResponse = response.data
                 error.value = null
                 members.value = postResponse
-            }
-
-            override fun onError(repositoryError: RepositoryError) {
-                val message = "${repositoryError.message} (code: ${repositoryError.errors})"
-                error.value = message
-            }
-
-        })
-    }
-
-    fun getNews(limit: Int) {
-
-        error.value = null
-
-        repository.getNews(limit, object : ResponseListener<List<News>> {
-
-            override fun onResponse(response: RepositoryResponse<List<News>>) {
-                val postResponse = response.data
-                println("postResponse   : " +postResponse)
-                error.value = null
-                news.value = postResponse
-                println("news.value   : " +news.value)
-                println("news.value   : " )
-
             }
 
             override fun onError(repositoryError: RepositoryError) {

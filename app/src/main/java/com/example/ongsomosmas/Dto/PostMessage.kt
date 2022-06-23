@@ -1,4 +1,4 @@
-package com.example.ongsomosmas.Model
+package com.example.ongsomosmas.Dto
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

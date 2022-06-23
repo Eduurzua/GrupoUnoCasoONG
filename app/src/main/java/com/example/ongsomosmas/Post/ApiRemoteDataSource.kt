@@ -1,7 +1,7 @@
 package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Dto.*
-import com.example.ongsomosmas.Model.PostMessage
+import com.example.ongsomosmas.Dto.PostMessage
 import com.example.ongsomosmas.Dto.Login
 import com.example.ongsomosmas.Dto.News
 import com.example.ongsomosmas.Dto.Register
@@ -24,19 +24,11 @@ class ApiRemoteDataSource {
                 response: Response<RepositoryResponse<UserRegister>>
             ) {
                 val callResponse = response.body()
-                println("callResponse Onresponse : " + callResponse)
-                println("success : " + callResponse?.success)
-                println("data : " + callResponse?.data)
-                println("message : " + callResponse?.message)
-                println("response.isSuccessful  : " + response.isSuccessful)
-                println("token   :"  + callResponse?.data?.token)
                 if (callResponse != null) {
                     if (response.isSuccessful && callResponse.success) {
-                        println("Entro if successful  :")
                         listener.onResponse(callResponse)
 
                     } else {
-                        println("Entro else de error  :")
                         listener.onError(
                             RepositoryError(
                                 message = "El servidor rechazó la solicitud",
@@ -48,7 +40,6 @@ class ApiRemoteDataSource {
             }
 
             override fun onFailure(call: Call<RepositoryResponse<UserRegister>>, t: Throwable) {
-                println("callResponse Onfailure : " + t)
                 listener.onError(
                     RepositoryError(
                         "Unexpected Error",
@@ -71,18 +62,10 @@ class ApiRemoteDataSource {
                 response: Response<RepositoryResponse<UserRegister>>
             ) {
                 val callResponse = response.body()
-                println("callResponse Onresponse : " + callResponse)
-                println("success : " + callResponse?.success)
-                println("data : " + callResponse?.data)
-                println("message : " + callResponse?.message)
-                println("response.isSuccessful  : " + response.isSuccessful)
-                println("token   :"  + callResponse?.data?.token)
                 if (callResponse != null) {
                     if (response.isSuccessful && callResponse.success) {
-                        println("Entro if successful  :")
                         listener.onResponse(callResponse)
                     } else {
-                        println("Entro else de error  :")
                         listener.onError(
                             RepositoryError(
                                 message = "El servidor rechazó la solicitud",
@@ -95,8 +78,6 @@ class ApiRemoteDataSource {
             }
 
             override fun onFailure(call: Call<RepositoryResponse<UserRegister>>, t: Throwable) {
-                println("callResponse Onfailure : " + t)
-
                 listener.onError(
                     RepositoryError(
                         "Unexpected Error",
@@ -197,7 +178,6 @@ class ApiRemoteDataSource {
                 val callResponse = response.body()
                 if (callResponse != null) {
                     if (response.isSuccessful && callResponse.success) {
-                        println("Entro if successful  :")
                         listener.onResponse(callResponse)
                     } else {
                         println("Entro else de error  :")
@@ -213,8 +193,6 @@ class ApiRemoteDataSource {
             }
 
             override fun onFailure(call: Call<RepositoryResponse<PostMessage>>, t: Throwable) {
-                println("callResponse Onfailure : " + t)
-
                 listener.onError(
                     RepositoryError(
                         "Unexpected Error",
@@ -222,50 +200,6 @@ class ApiRemoteDataSource {
                     )
                 )
             }
-        })
-    }
-
-    fun getNews(limit: Int, listener: ResponseListener<List<News>>) {
-        val service = RetrofitService.instance
-            .create(ApiService::class.java)
-            .getNews(limit)
-
-        service.enqueue(object : Callback<RepositoryResponse<List<News>>> {
-
-            override fun onResponse(call: Call<RepositoryResponse<List<News>>>, response: Response<RepositoryResponse<List<News>>>) {
-                val callResponse = response.body()
-                if (response.isSuccessful && callResponse != null) {
-                    println("Llamada satisfactoria a news")
-                    println("news    : " + callResponse)
-                    println("response.isSuccessful    : " + response.isSuccessful)
-                    println("message    : " + response.message())
-                    listener.onResponse(
-                        callResponse
-                    )
-                } else {
-                    println("else satisfactoria a news")
-                    listener.onError(
-                        RepositoryError(
-                            message = "El servidor rechazó la solicitud",
-                            errors = response.code(),
-
-                        )
-                    )
-                }
-            }
-
-            override fun onFailure(call: Call<RepositoryResponse<List<News>>>, t: Throwable) {
-                println(" onFailure a news")
-                listener.onError(
-                    RepositoryError(
-                        message = t.message ?: "Error inesperado",
-                        errors = -1,
-
-                    )
-                )
-                println("Mensajito "  +t.message)
-            }
-
         })
     }
 }

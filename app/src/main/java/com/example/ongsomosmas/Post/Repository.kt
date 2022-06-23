@@ -1,7 +1,7 @@
 package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Dto.*
-import com.example.ongsomosmas.Model.PostMessage
+import com.example.ongsomosmas.Dto.PostMessage
 import com.example.ongsomosmas.Dto.Login
 import com.example.ongsomosmas.Dto.News
 import com.example.ongsomosmas.Dto.Register

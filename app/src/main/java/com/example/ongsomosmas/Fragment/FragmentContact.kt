@@ -1,7 +1,6 @@
 package com.example.ongsomosmas.Fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.ongsomosmas.Model.PostMessage
+import com.example.ongsomosmas.Dto.PostMessage
 import com.example.ongsomosmas.R
 import com.example.ongsomosmas.databinding.FragmentContactBinding
 import com.example.ongsomosmas.views.MainViewModel

@@ -1,7 +1,6 @@
 package com.example.ongsomosmas.Fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ongsomosmas.R
 import com.example.ongsomosmas.adapter.SliderViewAdapter
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.ongsomosmas.databinding.FragmentNewsBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
@@ -69,7 +63,6 @@ class FragmentNews : Fragment() {
         viewModel.news.observe(viewLifecycleOwner){value ->
             if(value!= null){
                 listUrl.clear()
-                Log.i("DEBUG",value[0].image)
                 listUrl.add(value[0].image.replace("http://","https://"))
                 listUrl.add(value[1].image.replace("http://","https://"))
                 listUrl.add(value[2].image.replace("http://","https://"))
@@ -80,7 +73,6 @@ class FragmentNews : Fragment() {
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
-                Log.i("DEBUG", position.toString())
                 viewModel.selectNew(position)
                     super.onPageSelected(position)
             }
