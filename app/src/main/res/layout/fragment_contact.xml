@@ -160,7 +160,7 @@
             android:id="@+id/tv_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/popupMenuContact"
+            android:text="@string/popupMenuHome"
             tools:layout_editor_absoluteX="51dp"
             tools:layout_editor_absoluteY="65dp"
             app:layout_constraintStart_toStartOf="@id/icoHome"
