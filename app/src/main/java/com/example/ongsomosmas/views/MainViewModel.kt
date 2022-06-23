@@ -1,15 +1,10 @@
 package com.example.ongsomosmas.views
 
-import android.app.Application
 import android.content.Context
 import androidx.core.util.PatternsCompat
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ongsomosmas.Model.Login
-import com.example.ongsomosmas.Model.Register
-import com.example.ongsomosmas.Model.User
-import com.example.ongsomosmas.Model.UserRegister
+import com.example.ongsomosmas.Model.*
 import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
@@ -38,6 +33,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
 
     fun registerUser(newRegister: Register) {
         repository.registerUser(newRegister, object : ResponseListener<UserRegister> {
+
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
                 success.value = response.success
@@ -87,6 +83,19 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 println("valor Error : " + error.value)
             }
 
+        })
+    }
+
+    fun pushPost(post: PostMessage) {
+        repository.postMessageContact(post, object: ResponseListener<UserRegister> {
+
+            override fun onResponse(response: RepositoryResponse<UserRegister>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onError(repositoryError: RepositoryError) {
+                TODO("Not yet implemented")
+            }
         })
     }
 

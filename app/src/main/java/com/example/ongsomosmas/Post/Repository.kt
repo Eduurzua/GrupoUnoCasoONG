@@ -1,6 +1,7 @@
 package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Model.Login
+import com.example.ongsomosmas.Model.PostMessage
 import com.example.ongsomosmas.Model.Register
 import com.example.ongsomosmas.Model.UserRegister
 
@@ -14,5 +15,9 @@ class Repository(
 
     fun loginUser(login: Login, listener: ResponseListener<UserRegister>) {
         this.remoteDataSource.loginUser(login,listener)
+    }
+
+    fun postMessageContact(post: PostMessage, listener: ResponseListener<UserRegister>) {
+        this.remoteDataSource.postMessageContact(post,listener)
     }
 }

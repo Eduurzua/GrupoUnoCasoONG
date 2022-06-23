@@ -1,6 +1,7 @@
 package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Model.Login
+import com.example.ongsomosmas.Model.PostMessage
 import com.example.ongsomosmas.Model.Register
 import com.example.ongsomosmas.Model.UserRegister
 import retrofit2.Call
@@ -118,5 +119,32 @@ class ApiRemoteDataSource {
             }
 
         })
+    }
+
+    fun postMessageContact(post: PostMessage, listener: ResponseListener<PostMessage>) {
+        val service = RetrofitService.instance
+            .create(ApiService::class.java)
+            .postMessage(post)
+
+        service.enqueue(object : Callback<RepositoryResponse<PostMessage>>) {
+            override fun onResponse(
+                call: Call<RepositoryResponse<PostMessage>>,
+                response: Response<RepositoryResponse<PostMessage>>
+            ) {
+                val callResponse = response.body()
+                if (callResponse != null){
+                    if (response.isSuccessful && callResponse.success){
+                        listener.onResponse(
+                            RepositoryResponse(
+                                callResponse.success,
+                                callResponse.data,
+                                callResponse.message,
+                                callResponse.data.token
+                            )
+                        )
+                    }
+                }
+            }
+        }
     }
 }
