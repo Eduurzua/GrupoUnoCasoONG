@@ -1,6 +1,7 @@
 package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Dto.*
+import com.example.ongsomosmas.Model.PostMessage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +30,7 @@ class ApiRemoteDataSource {
                     if (response.isSuccessful && callResponse.success) {
                         println("Entro if successful  :")
                         listener.onResponse(callResponse)
+
                     } else {
                         println("Entro else de error  :")
                         listener.onError(
@@ -175,6 +177,47 @@ class ApiRemoteDataSource {
                 )
             }
 
+        })
+    }
+
+    fun postMessageContact(post: PostMessage, listener: ResponseListener<PostMessage>) {
+        val service = RetrofitService.instance
+            .create(ApiService::class.java)
+            .postMessage(post)
+
+        service.enqueue(object : Callback<RepositoryResponse<PostMessage>> {
+            override fun onResponse(
+                call: Call<RepositoryResponse<PostMessage>>,
+                response: Response<RepositoryResponse<PostMessage>>
+            ) {
+                val callResponse = response.body()
+                if (callResponse != null) {
+                    if (response.isSuccessful && callResponse.success) {
+                        println("Entro if successful  :")
+                        listener.onResponse(callResponse)
+                    } else {
+                        println("Entro else de error  :")
+                        listener.onError(
+                            RepositoryError(
+                                message = "El servidor rechazó la solicitud",
+                                errors = response.code(),
+                            )
+                        )
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<RepositoryResponse<PostMessage>>, t: Throwable) {
+                println("callResponse Onfailure : " + t)
+
+                listener.onError(
+                    RepositoryError(
+                        "Unexpected Error",
+                        errors = -1,
+                    )
+                )
+            }
         })
     }
 }

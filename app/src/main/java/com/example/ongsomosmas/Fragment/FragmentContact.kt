@@ -10,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.ongsomosmas.Model.PostMessage
 import com.example.ongsomosmas.R
 import com.example.ongsomosmas.databinding.FragmentContactBinding
 import com.example.ongsomosmas.views.MainViewModel
@@ -86,6 +87,19 @@ class FragmentContact : Fragment() {
         }
 
         binding.btSendMessage.setOnClickListener(){
+            viewModel.postMessage(
+                PostMessage(
+                    1,
+                    binding.tiNameLastname.editText?.text.toString(),
+                    binding.tiEmail.editText?.text.toString(),
+                    " ",
+                    binding.tiMessage.editText?.text.toString(),
+                    " ",
+                    " ",
+                    " "
+
+                )
+            )
             Toast.makeText(context, "Mensaje Enviado", Toast.LENGTH_SHORT).show()
         }
 

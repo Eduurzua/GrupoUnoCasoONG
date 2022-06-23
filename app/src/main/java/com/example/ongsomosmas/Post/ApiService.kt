@@ -2,7 +2,9 @@ package com.example.ongsomosmas.Post
 
 import android.telecom.CallScreeningService
 import com.example.ongsomosmas.Dto.*
+import com.example.ongsomosmas.Model.PostMessage
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -21,4 +23,7 @@ interface ApiService {
 
     @GET("/api/members")
     fun getMembers(@Query("limit") limit : Int): Call<RepositoryResponse<List<Members>>>
+
+    @POST("/api/contact")
+    fun postMessage(@Body post: PostMessage): Call<RepositoryResponse<PostMessage>>
 }

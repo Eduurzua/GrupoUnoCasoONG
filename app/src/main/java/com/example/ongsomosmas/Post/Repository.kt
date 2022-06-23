@@ -1,6 +1,7 @@
 package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Dto.*
+import com.example.ongsomosmas.Model.PostMessage
 
 class Repository(
 
@@ -19,6 +20,11 @@ class Repository(
     }
 
     fun getMembers(limit: Int, listener: ResponseListener<List<Members>>) {
-        this.remoteDataSource.getMembers(limit,listener)
+        this.remoteDataSource.getMembers(limit, listener)
+    }
+
+    fun postMessageContact(post: PostMessage, listener: ResponseListener<PostMessage>) {
+        this.remoteDataSource.postMessageContact(post, listener)
+
     }
 }

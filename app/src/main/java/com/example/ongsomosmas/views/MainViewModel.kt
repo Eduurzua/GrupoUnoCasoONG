@@ -6,6 +6,7 @@ import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ongsomosmas.Dto.*
+import com.example.ongsomosmas.Model.PostMessage
 import com.example.ongsomosmas.Post.Repository
 import com.example.ongsomosmas.Post.RepositoryError
 import com.example.ongsomosmas.Post.RepositoryResponse
@@ -29,7 +30,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val members = MutableLiveData<List<Members>>(null)
     val new = MutableLiveData<News>(null)
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
-
+    val postMessage = MutableLiveData<PostMessage?>(null)
 
      init {
          token.value = sharedPreferences.getString(R.string.tokenValue.toString(), "")
@@ -65,6 +66,24 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 editor.putString(R.string.tokenValue.toString(),token.value.toString())
                 editor.putString(R.string.tokenUser.toString(),user.value?.name.toString())
                 editor.apply()
+            }
+
+            override fun onError(repositoryError: RepositoryError) {
+                val message = "${repositoryError.message} (code: ${repositoryError.errors})"
+                error.value = message
+
+            }
+
+        })
+    }
+
+    fun postMessage(newPostMessage: PostMessage) {
+        repository.postMessageContact(newPostMessage, object : ResponseListener<PostMessage> {
+
+            override fun onResponse(response: RepositoryResponse<PostMessage>) {
+                success.value = response.success
+                message.value = response.message
+                postMessage.value = response.data
             }
 
             override fun onError(repositoryError: RepositoryError) {
