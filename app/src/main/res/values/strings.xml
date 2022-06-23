@@ -20,11 +20,14 @@
     <string name="wrongEmail">Wrong Email</string>
     <string name="wrongPassword">Wrong Password</string>
     <string name="wrongPasswordRepeat">Wrong Repeat Pass"</string>
-    <string name="contactTittle">¡Contactate con nosotros!</string>
-    <string name="message">Mensaje</string>
-    <string name="sendMessage">Enviar mensaje</string>
     <string name="tokenFile">token_file</string>
     <string name="tokenValue">tokenValue</string>
+    <string name="textHomeMain">"Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava generando procesos de crecimiento y de inserción social. Uniendo las manos de todas las familias, las que viven en el barrio y las que viven fuera de él, es que podemos pensar, crear y garantizar estos procesos.\n
+    Somos una asociación civil sin fines de lucro que se creó en 1997 con la intención de dar alimento a las familias del barrio. Con el tiempo fuimos involucrándonos con la comunidad y agrandando y mejorando nuestra capacidad de trabajo. Hoy somos un centro comunitario que acompaña a más de 700 personas a través de las áreas de: Educación, deportes, primera infancia, salud, alimentación y trabajo social."</string>
+    <string name="popupMenuHome">Inicio</string>
+    <string name="popupMenuStaff">Staff</string>
+    <string name="popupMenuNews">Novedades</string>
+    <string name="popupMenuContact">Contacto</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings related to login -->
@@ -36,4 +39,9 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="contactTittle">¡Contactate con nosotros!</string>
+    <string name="message">Mensaje</string>
+    <string name="sendMessage">Enviar mensaje</string>
+    <string name="tokenUser">tokenUser</string>
 </resources>

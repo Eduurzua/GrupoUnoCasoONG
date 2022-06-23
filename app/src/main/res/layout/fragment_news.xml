@@ -8,4 +8,223 @@
         android:layout_height="match_parent"
         android:background="@color/background_gray">
 
+
+    <ImageView
+        android:id="@+id/top_logo"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/vPagerHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/logo_somos_mas" />
+
+
+    <TextView
+        android:id="@+id/et_titleAPi"
+        android:layout_width="213dp"
+        android:layout_height="35dp"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:text="@string/popupMenuNews"
+        app:layout_constraintBottom_toTopOf="@+id/vPagerHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_logo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vPagerHome"
+        android:layout_width="match_parent"
+        android:layout_height="221dp"
+        android:layout_marginBottom="172dp"
+        android:contextClickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/MenuButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.577">
+
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/cIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/text_gray"
+        app:ci_gravity="center"
+        app:ci_height="5dp"
+        app:ci_margin="5dp"
+        app:ci_orientation="horizontal"
+        app:ci_width="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/et_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vPagerHome"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/et_lastNam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/name_lastname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/MenuButton"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_details"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <TextView
+        android:id="@+id/etTitleNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cIndicator"
+        app:layout_constraintVertical_bias="0.123" />
+
+    <TextView
+        android:id="@+id/et_details"
+        android:layout_width="301dp"
+        android:layout_height="143dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="84dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vPagerHome"
+        app:layout_constraintVertical_bias="0.924" />
+
+    <Button
+        android:id="@+id/MenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:text=""
+        app:icon="@drawable/ic_menu"
+        app:iconGravity="end"
+        app:iconSize="32dp"
+        app:iconTint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iconContact"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.16"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_contact" />
+
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuContact"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconContact"
+            app:layout_constraintEnd_toEndOf="@id/iconContact"
+            app:layout_constraintTop_toBottomOf="@id/iconContact"/>
+
+        <ImageView
+            android:id="@+id/iconStaff"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_staff" />
+
+        <TextView
+            android:id="@+id/tv_staff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuStaff"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconStaff"
+            app:layout_constraintEnd_toEndOf="@id/iconStaff"
+            app:layout_constraintTop_toBottomOf="@id/iconStaff"/>
+
+        <ImageView
+            android:id="@+id/iconHome"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.80"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_home" />
+
+        <TextView
+            android:id="@+id/tv_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuHome"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconHome"
+            app:layout_constraintEnd_toEndOf="@id/iconHome"
+            app:layout_constraintTop_toBottomOf="@id/iconHome"/>
+
+        <ImageView
+            android:id="@+id/iconClear"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_clear"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

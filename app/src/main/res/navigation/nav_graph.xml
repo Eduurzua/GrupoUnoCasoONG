@@ -49,10 +49,56 @@
         <action
             android:id="@+id/action_home_to_news"
             app:destination="@id/fragmentNews" />
+        <action
+            android:id="@+id/action_home_to_contact"
+            app:destination="@id/fragmentContact" />
+        <action
+            android:id="@+id/action_home_to_members"
+            app:destination="@id/fragmentMembers" />
     </fragment>
     <fragment
         android:id="@+id/fragmentNews"
         android:name="com.example.ongsomosmas.Fragment.FragmentNews"
         tools:layout="@layout/fragment_news"
-        android:label="FragmentNews" />
+        android:label="FragmentNews" >
+        <action
+            android:id="@+id/action_news_to_contact"
+            app:destination="@id/fragmentContact" />
+        <action
+            android:id="@+id/action_news_to_home"
+            app:destination="@id/fragmentHome" />
+        <action
+            android:id="@+id/action_news_to_members"
+            app:destination="@id/fragmentMembers" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentContact"
+        android:name="com.example.ongsomosmas.Fragment.FragmentContact"
+        tools:layout="@layout/fragment_contact"
+        android:label="FragmentContact" >
+        <action
+            android:id="@+id/action_contact_to_news"
+            app:destination="@id/fragmentNews" />
+        <action
+            android:id="@+id/action_contact_to_home"
+            app:destination="@id/fragmentHome" />
+        <action
+            android:id="@+id/action_contact_to_members"
+            app:destination="@id/fragmentMembers" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMembers"
+        android:name="com.example.ongsomosmas.Fragment.FragmentMembers"
+        android:label="fragment_members"
+        tools:layout="@layout/fragment_members" >
+        <action
+            android:id="@+id/action_members_to_home"
+            app:destination="@id/fragmentHome" />
+        <action
+            android:id="@+id/action_members_to_news"
+            app:destination="@id/fragmentNews" />
+        <action
+            android:id="@+id/action_members_to_contact"
+            app:destination="@id/fragmentContact" />
+    </fragment>
 </navigation>
