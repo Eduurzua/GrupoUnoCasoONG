@@ -30,6 +30,8 @@ class FragmentMembers :  Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.etLastNam.text = viewModel.findUser()
+
 /*Visibilidades de menu*/
         binding.MenuButton.setOnClickListener() {
             binding.menu.visibility = View.VISIBLE

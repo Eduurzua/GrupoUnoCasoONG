@@ -24,6 +24,6 @@ interface ApiService {
     @GET("/api/members")
     fun getMembers(@Query("limit") limit : Int): Call<RepositoryResponse<List<Members>>>
 
-    @POST("/api/contact")
+    @POST("/api/contacts")
     fun postMessage(@Body post: PostMessage): Call<RepositoryResponse<PostMessage>>
 }

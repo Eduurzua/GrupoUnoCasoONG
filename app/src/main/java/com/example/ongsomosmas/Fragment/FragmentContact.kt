@@ -1,6 +1,7 @@
 package com.example.ongsomosmas.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,7 +101,18 @@ class FragmentContact : Fragment() {
 
                 )
             )
-            Toast.makeText(context, "Mensaje Enviado", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.postMessage.observe(viewLifecycleOwner) { value ->
+            if (value != null) {
+                Toast.makeText(context, "$value", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { value ->
+            if (value != null) {
+                Toast.makeText(context, "$value", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
