@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">OngSomosMas</string>
+    <string name="name_lastname">Nombre y Apellido</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repite la contraseña</string>
+    <string name="register">Registrarme</string>
+    <string name="redirect">Ya tienes cuenta? Ingresa!</string>
+    <string name="login">Login</string>
+    <string name="sing_up">No tienes cuenta? Registrate!</string>
+    <string name="titleError">Error</string>
+    <string name="titleRegister">Usuario Registrado</string>
+    <string name="bodyErrorRegister">Usuario no registrado, vuelva a intentarlo.</string>
+    <string name="bodyRegisterOK">User was succesfully register</string>
+    <string name="bodyErrorLogin">Usuario no encontrado, vuelva a intentarlo.</string>
+    <string name="buttonOk">Ok</string>
+    <string name="notSamePassword">Passwords are not the same></string>
+    <string name="wrongName">Wrong Name</string>
+    <string name="wrongEmail">Wrong Email</string>
+    <string name="wrongPassword">Wrong Password</string>
+    <string name="wrongPasswordRepeat">Wrong Repeat Pass"</string>
+    <string name="tokenFile">token_file</string>
+    <string name="tokenValue">tokenValue</string>
+    <string name="tokenUser">tokenUser</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+</resources>
