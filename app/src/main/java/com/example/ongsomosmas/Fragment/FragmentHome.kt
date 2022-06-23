@@ -3,6 +3,9 @@ package com.example.ongsomosmas.Fragment
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,7 +14,6 @@ import com.example.ongsomosmas.R
 import com.example.ongsomosmas.databinding.FragmentHomeBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
-
 
 class FragmentHome : Fragment() {
 
@@ -57,6 +59,7 @@ class FragmentHome : Fragment() {
         }
 
         /*ojo como vuelve hacia atrás cuando esté implementado(Listooo!)*/
+
 
         return binding.root
     }

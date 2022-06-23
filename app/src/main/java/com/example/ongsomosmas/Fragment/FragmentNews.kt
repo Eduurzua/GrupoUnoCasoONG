@@ -12,6 +12,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ongsomosmas.R
 import com.example.ongsomosmas.adapter.SliderViewAdapter
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.ongsomosmas.databinding.FragmentNewsBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
@@ -21,6 +26,7 @@ class FragmentNews : Fragment() {
     private lateinit var viewAdapter : SliderViewAdapter
     private lateinit var binding: FragmentNewsBinding
     private lateinit var viewPager : ViewPager2
+
     private val viewModel: MainViewModel by viewModels(
         factoryProducer = { VideModelFactory(requireContext()) }
     )
@@ -97,5 +103,6 @@ class FragmentNews : Fragment() {
 
 
         return binding.root
+
         }
 }

@@ -3,6 +3,11 @@ package com.example.ongsomosmas.Post
 import android.telecom.CallScreeningService
 import com.example.ongsomosmas.Dto.*
 import com.example.ongsomosmas.Model.PostMessage
+import com.example.ongsomosmas.Dto.Login
+import com.example.ongsomosmas.Dto.News
+import com.example.ongsomosmas.Dto.Register
+import com.example.ongsomosmas.Dto.UserRegister
+
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -26,4 +31,5 @@ interface ApiService {
 
     @POST("/api/contacts")
     fun postMessage(@Body post: PostMessage): Call<RepositoryResponse<PostMessage>>
+
 }

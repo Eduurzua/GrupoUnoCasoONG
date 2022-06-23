@@ -2,6 +2,10 @@ package com.example.ongsomosmas.Post
 
 import com.example.ongsomosmas.Dto.*
 import com.example.ongsomosmas.Model.PostMessage
+import com.example.ongsomosmas.Dto.Login
+import com.example.ongsomosmas.Dto.News
+import com.example.ongsomosmas.Dto.Register
+import com.example.ongsomosmas.Dto.UserRegister
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -218,6 +222,50 @@ class ApiRemoteDataSource {
                     )
                 )
             }
+        })
+    }
+
+    fun getNews(limit: Int, listener: ResponseListener<List<News>>) {
+        val service = RetrofitService.instance
+            .create(ApiService::class.java)
+            .getNews(limit)
+
+        service.enqueue(object : Callback<RepositoryResponse<List<News>>> {
+
+            override fun onResponse(call: Call<RepositoryResponse<List<News>>>, response: Response<RepositoryResponse<List<News>>>) {
+                val callResponse = response.body()
+                if (response.isSuccessful && callResponse != null) {
+                    println("Llamada satisfactoria a news")
+                    println("news    : " + callResponse)
+                    println("response.isSuccessful    : " + response.isSuccessful)
+                    println("message    : " + response.message())
+                    listener.onResponse(
+                        callResponse
+                    )
+                } else {
+                    println("else satisfactoria a news")
+                    listener.onError(
+                        RepositoryError(
+                            message = "El servidor rechazó la solicitud",
+                            errors = response.code(),
+
+                        )
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<RepositoryResponse<List<News>>>, t: Throwable) {
+                println(" onFailure a news")
+                listener.onError(
+                    RepositoryError(
+                        message = t.message ?: "Error inesperado",
+                        errors = -1,
+
+                    )
+                )
+                println("Mensajito "  +t.message)
+            }
+
         })
     }
 }
