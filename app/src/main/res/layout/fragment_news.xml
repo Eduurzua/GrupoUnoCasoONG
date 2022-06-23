@@ -22,8 +22,8 @@
         android:id="@+id/vPagerHome"
         android:layout_width="411dp"
         android:layout_height="262dp"
+        android:layout_marginTop="184dp"
         android:contextClickable="true"
-        android:layout_marginTop="124dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,6 +56,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indicator"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/et_title"
+        android:layout_width="216dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="576dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/MenuButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/et_details"
+        android:layout_width="286dp"
+        android:layout_height="154dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="144dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indicator"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/MenuButton"

@@ -27,6 +27,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val token = MutableLiveData<String?>(null)
     val news = MutableLiveData<List<News>>(null)
     val members = MutableLiveData<List<Members>>(null)
+    val new = MutableLiveData<News>(null)
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
 
 
@@ -177,4 +178,9 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     fun findUser(): String? {
         return sharedPreferences.getString(R.string.tokenUser.toString(), "")
     }
+
+    fun selectNew(position : Int){
+        new.value = news.value?.get(position)
+    }
+
 }

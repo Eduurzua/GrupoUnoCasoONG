@@ -1,6 +1,7 @@
 package com.example.ongsomosmas.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,22 +60,37 @@ class FragmentNews : Fragment() {
             findNavController().navigate(R.id.action_news_to_members)
         }
 
-        /*viewModel.getNews(4)
+        viewModel.getNews(4)
 
         viewModel.news.observe(viewLifecycleOwner){value ->
             if(value!= null){
-                listUrl.add(value.component1().image)
-                listUrl.add(value.component2().image)
-                listUrl.add(value.component3().image)
-                listUrl.add(value.component4().image)
+                listUrl.clear()
+                Log.i("DEBUG",value[0].image)
+                listUrl.add(value[0].image.replace("http://","https://"))
+                listUrl.add(value[1].image.replace("http://","https://"))
+                listUrl.add(value[2].image.replace("http://","https://"))
+                listUrl.add(value[3].image.replace("http://","https://"))
+                viewAdapter.notifyDataSetChanged()
             }
         }
 
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                Log.i("DEBUG", position.toString())
+                viewModel.selectNew(position)
+                    super.onPageSelected(position)
+            }
+        })
+
+        viewModel.new.observe(viewLifecycleOwner) { value ->
+            if (value != null) {
+                binding.etTitle.text = value.name
+                binding.etDetails.text = value.content
+            }
+        }
 
         viewAdapter = SliderViewAdapter(listUrl)
         viewPager.adapter = viewAdapter
-
-         */
 
         return binding.root
         }

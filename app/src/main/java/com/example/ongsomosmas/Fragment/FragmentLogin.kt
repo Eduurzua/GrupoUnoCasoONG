@@ -68,19 +68,19 @@ class FragmentLogin : Fragment() {
                     binding.tiPassword.editText?.text.toString()
                 )
             )
-            viewModel.success.observe(viewLifecycleOwner) { response ->
-                if (response) {
-                    findNavController().navigate(R.id.action_login_to_home)
-                }
-            }
-            viewModel.error.observe(viewLifecycleOwner) {response ->
-                if (response != null) {
-                    dialogAlert(getString(R.string.bodyErrorLogin))
-
-                }
-            }
-
         }
+        viewModel.success.observe(viewLifecycleOwner) { response ->
+             if (response) {
+                 findNavController().navigate(R.id.action_login_to_home)
+             }
+        }
+        viewModel.error.observe(viewLifecycleOwner) {response ->
+             if (response != null) {
+                dialogAlert(getString(R.string.bodyErrorLogin))
+               }
+        }
+
+
         binding.tiEmail.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,
