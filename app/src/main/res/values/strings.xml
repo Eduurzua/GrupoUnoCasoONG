@@ -20,6 +20,9 @@
     <string name="wrongEmail">Wrong Email</string>
     <string name="wrongPassword">Wrong Password</string>
     <string name="wrongPasswordRepeat">Wrong Repeat Pass"</string>
+    <string name="contactTittle">¡Contactate con nosotros!</string>
+    <string name="message">Mensaje</string>
+    <string name="sendMessage">Enviar mensaje</string>
     <string name="tokenFile">token_file</string>
     <string name="tokenValue">tokenValue</string>
     <string name="textHomeMain">"Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava generando procesos de crecimiento y de inserción social. Uniendo las manos de todas las familias, las que viven en el barrio y las que viven fuera de él, es que podemos pensar, crear y garantizar estos procesos.\n
@@ -28,6 +31,7 @@
     <string name="popupMenuStaff">Staff</string>
     <string name="popupMenuNews">Novedades</string>
     <string name="popupMenuContact">Contacto</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
