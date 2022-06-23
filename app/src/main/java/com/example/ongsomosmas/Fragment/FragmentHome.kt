@@ -19,21 +19,37 @@ class FragmentHome : Fragment() {
     private val viewModel: MainViewModel by viewModels(
         factoryProducer = { VideModelFactory(requireContext()) }
     )
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            activity?.finish()
+    ): View? {
+        this.setHasOptionsMenu(true)
+
+        binding = ActivityHomeBinding.inflate(inflater, container, false)
+
+        /*Visibilidades de menu*/
+        binding.MenuButton.setOnClickListener() {
+            binding.menu.visibility = View.VISIBLE
+            binding.MenuButton.visibility = View.GONE
+        }
+        binding.iconClear.setOnClickListener() {
+            binding.menu.visibility = View.GONE
+            binding.MenuButton.visibility = View.VISIBLE
         }
 
-        binding.button3.setOnClickListener(){
-            findNavController().navigate(R.id.action_home_to_news)
+        /*Opciones menu*/
+        binding.iconContact.setOnClickListener() {
+            Toast.makeText(context, "Redirigiendo a contactos", Toast.LENGTH_SHORT).show()
         }
+        binding.iconNews.setOnClickListener() {
+            Toast.makeText(context, "Redirigiendo a novedades", Toast.LENGTH_SHORT).show()
+        }
+        binding.iconStaff.setOnClickListener() {
+            Toast.makeText(context, "Redirigiendo a Staff", Toast.LENGTH_SHORT).show()
+        }
+
 
         return binding.root
     }

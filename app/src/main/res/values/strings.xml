@@ -8,6 +8,7 @@
     <string name="redirect">Ya tienes cuenta? Ingresa!</string>
     <string name="login">Login</string>
     <string name="sing_up">No tienes cuenta? Registrate!</string>
+    <string name="title">Hola! Bienvenidx</string>
     <string name="titleError">Error</string>
     <string name="titleRegister">Usuario Registrado</string>
     <string name="bodyErrorRegister">Usuario no registrado, vuelva a intentarlo.</string>
@@ -19,9 +20,11 @@
     <string name="wrongEmail">Wrong Email</string>
     <string name="wrongPassword">Wrong Password</string>
     <string name="wrongPasswordRepeat">Wrong Repeat Pass"</string>
+    <string name="contactTittle">¡Contactate con nosotros!</string>
+    <string name="message">Mensaje</string>
+    <string name="sendMessage">Enviar mensaje</string>
     <string name="tokenFile">token_file</string>
     <string name="tokenValue">tokenValue</string>
-    <string name="tokenUser">tokenUser</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings related to login -->
