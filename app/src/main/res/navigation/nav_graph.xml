@@ -49,10 +49,18 @@
         <action
             android:id="@+id/action_home_to_news"
             app:destination="@id/fragmentNews" />
+        <action
+            android:id="@+id/action_home_to_contact"
+            app:destination="@id/fragmentContact" />
     </fragment>
     <fragment
         android:id="@+id/fragmentNews"
         android:name="com.example.ongsomosmas.Fragment.FragmentNews"
         tools:layout="@layout/fragment_news"
         android:label="FragmentNews" />
+    <fragment
+        android:id="@+id/fragmentContact"
+        android:name="com.example.ongsomosmas.Fragment.FragmentContact"
+        tools:layout="@layout/fragment_contact"
+        android:label="FragmentContact" />
 </navigation>

@@ -8,13 +8,13 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.ongsomosmas.databinding.ActivityContactBinding
+import com.example.ongsomosmas.databinding.FragmentContactBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
 
 class FragmentContact : Fragment() {
 
-    private lateinit var binding: ActivityContactBinding
+    private lateinit var binding: FragmentContactBinding
     private val viewModel: MainViewModel by viewModels(factoryProducer = { VideModelFactory(this.requireContext()) })
 
     override fun onCreateView(
@@ -22,7 +22,7 @@ class FragmentContact : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ActivityContactBinding.inflate(inflater, container, false)
+        binding = FragmentContactBinding.inflate(inflater, container, false)
 
         /*Boton enviar mensaje inactivo*/
         binding.btSendMessage.isEnabled = false
