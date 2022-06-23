@@ -30,7 +30,7 @@ class FragmentHome : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigateUp()
+            activity?.finish()
         }
 
         binding.etLastNam.text = viewModel.findUser()

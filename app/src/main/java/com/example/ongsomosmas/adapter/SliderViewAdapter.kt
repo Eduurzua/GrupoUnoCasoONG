@@ -32,8 +32,8 @@ class SliderViewAdapter(private val urlList : List<String>) : RecyclerView.Adapt
             Glide.with(itemView.context)
                 .load(url)
                 .fitCenter()
+                .placeholder(R.drawable.placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
                 .into(sliderImageView)
             }
         }

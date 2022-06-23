@@ -5,13 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.example.ongsomosmas.Dto.News
 import com.example.ongsomosmas.R
 import com.example.ongsomosmas.adapter.SliderViewAdapter
 import com.example.ongsomosmas.databinding.FragmentNewsBinding
@@ -82,15 +80,21 @@ class FragmentNews : Fragment() {
             }
         })
 
+
+
         viewModel.new.observe(viewLifecycleOwner) { value ->
             if (value != null) {
-                binding.etTitle.text = value.name
+                binding.etTitleNews.text = value.name
                 binding.etDetails.text = value.content
             }
         }
 
         viewAdapter = SliderViewAdapter(listUrl)
         viewPager.adapter = viewAdapter
+        binding.cIndicator.setViewPager(viewPager)
+        viewAdapter.registerAdapterDataObserver(binding.cIndicator.adapterDataObserver)
+        viewPager.setPageTransformer(ZoomOutPageTransformer())
+
 
         return binding.root
         }
