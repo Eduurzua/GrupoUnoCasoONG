@@ -115,15 +115,10 @@ class ApiRemoteDataSource {
             override fun onResponse(call: Call<RepositoryResponse<List<News>>>, response: Response<RepositoryResponse<List<News>>>) {
                 val callResponse = response.body()
                 if (response.isSuccessful && callResponse != null) {
-                    println("Llamada satisfactoria a news")
-                    println("news    : " + callResponse)
-                    println("response.isSuccessful    : " + response.isSuccessful)
-                    println("message    : " + response.message())
                     listener.onResponse(
                         callResponse
                     )
                 } else {
-                    println("else satisfactoria a news")
                     listener.onError(
                         RepositoryError(
                             message = "El servidor rechazó la solicitud",
@@ -143,7 +138,6 @@ class ApiRemoteDataSource {
 
                     )
                 )
-                println("Mensajito "  +t.message)
             }
 
         })

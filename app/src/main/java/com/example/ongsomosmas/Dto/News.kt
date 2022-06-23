@@ -25,4 +25,4 @@ data class News(
     val updatedAt: Date,
     @SerializedName("deleted_at")
     val deletedAt: Date
-) : Serializable
+)

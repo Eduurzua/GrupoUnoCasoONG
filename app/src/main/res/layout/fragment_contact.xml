@@ -104,5 +104,130 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ti_message" />
 
+    <TextView
+        android:id="@+id/et_lastNam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/name_lastname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/MenuButton"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_SendMessage"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/MenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:text=""
+        app:icon="@drawable/ic_menu"
+        app:iconGravity="end"
+        app:iconSize="32dp"
+        app:iconTint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/icoHome"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.16"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_home" />
+
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuContact"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/icoHome"
+            app:layout_constraintEnd_toEndOf="@id/icoHome"
+            app:layout_constraintTop_toBottomOf="@id/icoHome"/>
+
+        <ImageView
+            android:id="@+id/iconStaff"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_staff" />
+
+        <TextView
+            android:id="@+id/tv_staff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuStaff"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconStaff"
+            app:layout_constraintEnd_toEndOf="@id/iconStaff"
+            app:layout_constraintTop_toBottomOf="@id/iconStaff"/>
+
+        <ImageView
+            android:id="@+id/iconNews"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.80"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_news" />
+
+        <TextView
+            android:id="@+id/tv_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuNews"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconNews"
+            app:layout_constraintEnd_toEndOf="@id/iconNews"
+            app:layout_constraintTop_toBottomOf="@id/iconNews"/>
+
+        <ImageView
+            android:id="@+id/iconClear"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_clear"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

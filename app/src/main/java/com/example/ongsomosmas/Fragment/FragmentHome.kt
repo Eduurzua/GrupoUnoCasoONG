@@ -5,15 +5,20 @@ import android.view.*
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.ongsomosmas.R
 import com.example.ongsomosmas.databinding.FragmentHomeBinding
+import com.example.ongsomosmas.views.MainViewModel
+import com.example.ongsomosmas.views.VideModelFactory
 
 
 class FragmentHome : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-
+    private val viewModel: MainViewModel by viewModels(
+        factoryProducer = { VideModelFactory(requireContext()) }
+    )
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,11 +26,14 @@ class FragmentHome : Fragment() {
     ): View? {
         this.setHasOptionsMenu(true)
 
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            activity?.finish()
+            findNavController().navigateUp()
         }
+
+        binding.etLastNam.text = viewModel.findUser()
 
         /*Visibilidades de menu*/
         binding.MenuButton.setOnClickListener() {
@@ -48,7 +56,7 @@ class FragmentHome : Fragment() {
             Toast.makeText(context, "Redirigiendo a Staff", Toast.LENGTH_SHORT).show()
         }
 
-        /*ojo como vuelve hacia atrás cuando esté implementado*/
+        /*ojo como vuelve hacia atrás cuando esté implementado(Listooo!)*/
 
         return binding.root
     }

@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.ongsomosmas.R
 import com.example.ongsomosmas.databinding.FragmentContactBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
@@ -23,6 +26,23 @@ class FragmentContact : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentContactBinding.inflate(inflater, container, false)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigateUp()
+        }
+
+        binding.etLastNam.text = viewModel.findUser()
+
+        /*Opciones menu*/
+        binding.icoHome.setOnClickListener() {
+            findNavController().navigate(R.id.action_contact_to_news)
+        }
+        binding.iconNews.setOnClickListener() {
+            findNavController().navigate(R.id.action_contact_to_news)
+        }
+        binding.iconStaff.setOnClickListener() {
+            Toast.makeText(context, "Redirigiendo a Staff", Toast.LENGTH_SHORT).show()
+        }
 
         /*Boton enviar mensaje inactivo*/
         binding.btSendMessage.isEnabled = false

@@ -8,4 +8,166 @@
         android:layout_height="match_parent"
         android:background="@color/background_gray">
 
+
+    <ImageView
+        android:id="@+id/top_logo"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_somos_mas" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vPagerHome"
+        android:layout_width="411dp"
+        android:layout_height="262dp"
+        android:contextClickable="true"
+        android:layout_marginTop="124dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        app:ci_gravity="center"
+        app:ci_height="5dp"
+        app:ci_margin="5dp"
+        app:ci_orientation="horizontal"
+        app:ci_width="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/vPagerHome"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/et_lastNam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/name_lastname"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/MenuButton"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indicator"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/MenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:text=""
+        app:icon="@drawable/ic_menu"
+        app:iconGravity="end"
+        app:iconSize="32dp"
+        app:iconTint="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iconContact"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.16"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_contact" />
+
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuContact"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconContact"
+            app:layout_constraintEnd_toEndOf="@id/iconContact"
+            app:layout_constraintTop_toBottomOf="@id/iconContact"/>
+
+        <ImageView
+            android:id="@+id/iconStaff"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_staff" />
+
+        <TextView
+            android:id="@+id/tv_staff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuStaff"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconStaff"
+            app:layout_constraintEnd_toEndOf="@id/iconStaff"
+            app:layout_constraintTop_toBottomOf="@id/iconStaff"/>
+
+        <ImageView
+            android:id="@+id/iconHome"
+            android:layout_width="43dp"
+            android:layout_height="35dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.80"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_home" />
+
+        <TextView
+            android:id="@+id/tv_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popupMenuNews"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp"
+            app:layout_constraintStart_toStartOf="@id/iconHome"
+            app:layout_constraintEnd_toEndOf="@id/iconHome"
+            app:layout_constraintTop_toBottomOf="@id/iconHome"/>
+
+        <ImageView
+            android:id="@+id/iconClear"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:tint="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_clear"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

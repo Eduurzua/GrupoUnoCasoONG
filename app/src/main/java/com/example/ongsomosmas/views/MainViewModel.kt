@@ -41,18 +41,11 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 message.value = response.message
                 user.value = response.data.user
                 token.value = response.data.token
-                println("success.value   : " + success.value)
-                println("message.value   : " + message.value)
-                println("user.value   : " + user.value)
-                println("token.value   : " + token.value)
-
             }
 
             override fun onError(repositoryError: RepositoryError) {
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
                 error.value = message
-                println("Mensaje Error : " + message)
-                println("valor Error : " + error.value)
             }
 
         })
@@ -62,7 +55,6 @@ class MainViewModel(private val repository: Repository, context: Context) : View
         repository.loginUser(newLogin, object : ResponseListener<UserRegister> {
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
-                println("Login")
                 val editor = sharedPreferences.edit()
                 success.value = response.success
                 message.value = response.message
@@ -71,18 +63,12 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 editor.putString(R.string.tokenValue.toString(),token.value.toString())
                 editor.putString(R.string.tokenUser.toString(),user.value?.name.toString())
                 editor.apply()
-                println("success.value   : " + success.value)
-                println("message.value   : " + message.value)
-                println("user.value   : " + user.value)
-                println("token.value   : " + token.value)
             }
 
             override fun onError(repositoryError: RepositoryError) {
-                println("Login Error")
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
                 error.value = message
-                println("Mensaje Error : " + message)
-                println("valor Error : " + error.value)
+
             }
 
         })
@@ -96,12 +82,8 @@ class MainViewModel(private val repository: Repository, context: Context) : View
 
             override fun onResponse(response: RepositoryResponse<List<News>>) {
                 val postResponse = response.data
-                println("postResponse   : " +postResponse)
                 error.value = null
                 news.value = postResponse
-                println("news.value   : " +news.value)
-                println("news.value   : " )
-
             }
 
             override fun onError(repositoryError: RepositoryError) {
@@ -170,4 +152,8 @@ class MainViewModel(private val repository: Repository, context: Context) : View
         val preferences =  sharedPreferences.getString(R.string.tokenValue.toString(),"")
         return !preferences.equals("")
         }
+
+    fun findUser(): String? {
+        return sharedPreferences.getString(R.string.tokenUser.toString(), "")
+    }
 }
