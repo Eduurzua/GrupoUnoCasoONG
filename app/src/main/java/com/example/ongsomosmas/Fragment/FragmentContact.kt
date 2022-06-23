@@ -31,6 +31,16 @@ class FragmentContact : Fragment() {
             findNavController().navigateUp()
         }
 
+        /*Visibilidades de menu*/
+        binding.MenuButton.setOnClickListener() {
+            binding.menu.visibility = View.VISIBLE
+            binding.MenuButton.visibility = View.GONE
+        }
+        binding.iconClear.setOnClickListener() {
+            binding.menu.visibility = View.GONE
+            binding.MenuButton.visibility = View.VISIBLE
+        }
+
         binding.etLastNam.text = viewModel.findUser()
 
         /*Opciones menu*/
