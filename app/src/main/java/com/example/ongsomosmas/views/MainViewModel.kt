@@ -25,7 +25,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val enableRegister = MutableLiveData<Boolean>(false)
     val samePassword = MutableLiveData<Boolean>(true)
     val token = MutableLiveData<String?>(null)
-    val news = MutableLiveData<List<News?>>(null)
+    val news = MutableLiveData<List<News>>(null)
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
 
 
@@ -100,6 +100,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 error.value = null
                 news.value = postResponse
                 println("news.value   : " +news.value)
+                println("news.value   : " )
 
             }
 

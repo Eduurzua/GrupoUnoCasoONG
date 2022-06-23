@@ -1,5 +1,6 @@
 package com.example.ongsomosmas.Post
 
+import android.telecom.CallScreeningService
 import com.example.ongsomosmas.Dto.Login
 import com.example.ongsomosmas.Dto.News
 import com.example.ongsomosmas.Dto.Register
@@ -19,5 +20,5 @@ interface ApiService {
     fun loginUser(@Body login: Login): Call<RepositoryResponse<UserRegister>>
 
     @GET("/api/news")
-    fun getNews(@Query("limit") limit : Int): Call<List<News>>
+    fun getNews(@Query("limit") limit : Int): Call<RepositoryResponse<List<News>>>
 }

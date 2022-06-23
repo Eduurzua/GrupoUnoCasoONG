@@ -1,44 +1,37 @@
 package com.example.ongsomosmas.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.ongsomosmas.Dto.News
-import com.example.ongsomosmas.R
-import com.example.ongsomosmas.databinding.FragmentNewsBinding
 import com.example.ongsomosmas.databinding.ImageSliderItemBinding
-import com.google.android.material.imageview.ShapeableImageView
 
-class SliderViewAdapter(private var imageList: List<String>) :
-    RecyclerView.Adapter<SliderViewAdapter.ImagesViewHolder>() {
+class SliderViewAdapter() : RecyclerView.Adapter<SliderViewAdapter.SliderViewHolder>(){
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): SliderViewAdapter.ImagesViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.image_slider_item,parent,false)
-        return ImagesViewHolder(view)
+    private lateinit var news: List<News>
+
+    fun setNews(newANews : List<News>) {
+        this.news = newANews
+        this.notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: SliderViewAdapter.ImagesViewHolder, position: Int) {
-        holder.bind(imageList[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ImageSliderItemBinding.inflate(layoutInflater,parent,false)
+        return SliderViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
+        holder.bind(this.news[position])
     }
 
     override fun getItemCount(): Int {
-        return this.imageList.size
+        return this.news.size
     }
 
-    class ImagesViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
-
-        private val sliderImageView = itemView.findViewById<ShapeableImageView>(R.id.sliderImageView)
-
-        fun bind(data: String) {
-            Glide.with(itemView.context)
-                .load(data)
-                .into(sliderImageView)
+    class SliderViewHolder( private val binding: ImageSliderItemBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(news: News) {
+        //TODO
+            }
         }
-    }
 }

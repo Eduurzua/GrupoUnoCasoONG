@@ -110,21 +110,17 @@ class ApiRemoteDataSource {
             .create(ApiService::class.java)
             .getNews(limit)
 
-        service.enqueue(object : Callback<List<News>> {
+        service.enqueue(object : Callback<RepositoryResponse<List<News>>> {
 
-            override fun onResponse(call: Call<List<News>>, response: Response<List<News>>) {
-                val news = response.body()
-                if (response.isSuccessful && news != null) {
+            override fun onResponse(call: Call<RepositoryResponse<List<News>>>, response: Response<RepositoryResponse<List<News>>>) {
+                val callResponse = response.body()
+                if (response.isSuccessful && callResponse != null) {
                     println("Llamada satisfactoria a news")
-                    println("news    : " + news)
+                    println("news    : " + callResponse)
                     println("response.isSuccessful    : " + response.isSuccessful)
                     println("message    : " + response.message())
                     listener.onResponse(
-                        RepositoryResponse(
-                            data = news,
-                            message = response.message(),
-                            success = true
-                        )
+                        callResponse
                     )
                 } else {
                     println("else satisfactoria a news")
@@ -138,7 +134,7 @@ class ApiRemoteDataSource {
                 }
             }
 
-            override fun onFailure(call: Call<List<News>>, t: Throwable) {
+            override fun onFailure(call: Call<RepositoryResponse<List<News>>>, t: Throwable) {
                 println(" onFailure a news")
                 listener.onError(
                     RepositoryError(
