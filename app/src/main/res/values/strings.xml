@@ -47,5 +47,6 @@
     <string name="messageValidation">Ha ocurrido un error. Intente nuevamente mas tarde</string>
     <string name="messageValidationOk">La solicitud se ingreso correctamente</string>
     <string name="solicitudOK">Muchas gracias!</string>
+    <string name="Rol">Rol que desempeña</string>
     <string name="newsNotOK">Ha ocurrido un error obteniendo la información</string>
 </resources>

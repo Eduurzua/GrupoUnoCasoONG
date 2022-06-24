@@ -59,6 +59,15 @@ class FragmentLogin : Fragment() {
         viewModel.enableButton.observe(viewLifecycleOwner) { value ->
             binding.btnLogin.isEnabled = value
         }
+        viewModel.loading.observe(viewLifecycleOwner) { value ->
+            if (value) {
+                binding.btnLogin.isEnabled = false
+                binding.progressCircular.visibility = View.VISIBLE
+            } else {
+                binding.btnLogin.isEnabled = true
+                binding.progressCircular.visibility = View.GONE
+            }
+        }
 
         binding.btnLogin.setOnClickListener {
             viewModel.loginUser(
@@ -67,14 +76,17 @@ class FragmentLogin : Fragment() {
                     binding.tiPassword.editText?.text.toString()
                 )
             )
+            binding.progressCircular.visibility = View.VISIBLE
         }
         viewModel.success.observe(viewLifecycleOwner) { response ->
              if (response) {
+                 binding.progressCircular.visibility = View.GONE
                  findNavController().navigate(R.id.action_login_to_home)
              }
         }
         viewModel.error.observe(viewLifecycleOwner) {response ->
              if (response != null) {
+                 binding.progressCircular.visibility = View.GONE
                 dialogAlert(getString(R.string.bodyErrorLogin))
                }
         }

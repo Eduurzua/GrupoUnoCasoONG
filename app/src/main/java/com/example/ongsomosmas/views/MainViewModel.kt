@@ -2,6 +2,7 @@ package com.example.ongsomosmas.views
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,6 +33,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val member = MutableLiveData<Members>(null)
     val postMessage = MutableLiveData<PostMessage?>(null)
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
+    val loading: MutableLiveData<Boolean> = MutableLiveData(false)
 
      init {
          token.value = sharedPreferences.getString(R.string.tokenValue.toString(), "")
@@ -67,12 +69,15 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 editor.putString(R.string.tokenValue.toString(),token.value.toString())
                 editor.putString(R.string.tokenUser.toString(),user.value?.name.toString())
                 editor.apply()
+                loading.value = true
+                Log.i("DEBBUG LOADING response",loading.value.toString())
             }
 
             override fun onError(repositoryError: RepositoryError) {
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
                 error.value = message
-
+                loading.value = false
+                Log.i("DEBBUG LOADING Fail",loading.value.toString())
             }
 
         })
