@@ -40,6 +40,9 @@ class MainViewModel(private val repository: Repository, context: Context) : View
      }
 
     fun registerUser(newRegister: Register) {
+
+        loading.value = false
+
         repository.registerUser(newRegister, object : ResponseListener<UserRegister> {
 
             override fun onResponse(response: RepositoryResponse<UserRegister>) {
@@ -47,11 +50,13 @@ class MainViewModel(private val repository: Repository, context: Context) : View
                 message.value = response.message
                 user.value = response.data.user
                 token.value = response.data.token
+                loading.value = true
             }
 
             override fun onError(repositoryError: RepositoryError) {
                 val message = "${repositoryError.message} (code: ${repositoryError.errors})"
                 error.value = message
+                loading.value = false
             }
 
         })
@@ -191,8 +196,12 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     }
 
     fun samePasswordRepeat(password: String, passwordRepeat: String) {
+        Log.i("samePasswordRepeat", "Pruebas")
+        Log.i("password", password.toString())
+        Log.i("passwordRepeat", passwordRepeat.toString())
         samePassword.value = (password.isNullOrEmpty() && passwordRepeat.isNullOrEmpty())
                 || (password == passwordRepeat)
+        Log.i("samePasswordRepeat", samePassword.value.toString())
     }
 
     fun loadUser() : Boolean {

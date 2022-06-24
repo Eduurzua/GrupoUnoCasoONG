@@ -3,6 +3,7 @@ package com.example.ongsomosmas.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,16 +78,19 @@ class FragmentLogin : Fragment() {
                 )
             )
             binding.progressCircular.visibility = View.VISIBLE
+            binding.btnLogin.isEnabled = false
         }
         viewModel.success.observe(viewLifecycleOwner) { response ->
              if (response) {
                  binding.progressCircular.visibility = View.GONE
+                 binding.btnLogin.isEnabled = true
                  findNavController().navigate(R.id.action_login_to_home)
              }
         }
         viewModel.error.observe(viewLifecycleOwner) {response ->
              if (response != null) {
                  binding.progressCircular.visibility = View.GONE
+                 binding.btnLogin.isEnabled = true
                 dialogAlert(getString(R.string.bodyErrorLogin))
                }
         }

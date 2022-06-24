@@ -15,11 +15,11 @@
     <string name="bodyRegisterOK">Usuario registrado correctamente</string>
     <string name="bodyErrorLogin">Usuario no encontrado, vuelva a intentarlo.</string>
     <string name="buttonOk">Ok</string>
-    <string name="notSamePassword">Las contraseñas son diferentes></string>
+    <string name="notSamePassword">Las contraseñas son diferentes</string>
     <string name="wrongName">Nombre y Apellido con error</string>
     <string name="wrongEmail">Email con error</string>
     <string name="wrongPassword">Password con error</string>
-    <string name="wrongPasswordRepeat">Password confirmacion con error"</string>
+    <string name="wrongPasswordRepeat">Password confirmacion con error</string>
     <string name="tokenFile">token_file</string>
     <string name="tokenValue">tokenValue</string>
     <string name="textHomeMain">"Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava generando procesos de crecimiento y de inserción social. Uniendo las manos de todas las familias, las que viven en el barrio y las que viven fuera de él, es que podemos pensar, crear y garantizar estos procesos.\n
