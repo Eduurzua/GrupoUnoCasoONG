@@ -1,6 +1,8 @@
 package com.example.ongsomosmas.Fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import com.example.ongsomosmas.R
 import com.example.ongsomosmas.databinding.FragmentContactBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FragmentContact : Fragment() {
 
@@ -103,6 +106,82 @@ class FragmentContact : Fragment() {
             )
         }
 
+        binding.tiNameLastname.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                binding.tiNameLastname.error = ""
+
+            }
+
+        })
+        binding.tiEmail.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                binding.tiEmail.error = ""
+
+            }
+
+        })
+        binding.tiMessage.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                binding.tiMessage.error = ""
+
+            }
+
+        })
+
         viewModel.postMessage.observe(viewLifecycleOwner) { value ->
             if (value != null) {
                 Toast.makeText(context, "$value", Toast.LENGTH_SHORT).show()
@@ -111,11 +190,36 @@ class FragmentContact : Fragment() {
 
         viewModel.error.observe(viewLifecycleOwner) { value ->
             if (value != null) {
-                Toast.makeText(context, "$value", Toast.LENGTH_SHORT).show()
+                dialogAlert(getString(R.string.bodyErrorContact))
             }
         }
 
         return binding.root
+    }
+
+    private fun clearTextSignUp() {
+        binding.tiNameLastname.editText?.text?.clear()
+        binding.tiEmail.editText?.text?.clear()
+        binding.tiMessage.editText?.text?.clear()
+    }
+
+    private fun warnError() {
+        binding.tiMessage.error = (getString(R.string.titleError))
+    }
+
+    private fun dialogAlert(body: String) {
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(getString(R.string.titleError))
+                .setMessage(body)
+                .setPositiveButton(
+                    getString(R.string.buttonOk)
+                ) { _, _ ->
+                    clearTextSignUp()
+                    warnError()
+                }
+                .show()
+        };
     }
 
 }
