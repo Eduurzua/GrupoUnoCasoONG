@@ -1,6 +1,7 @@
 package com.example.ongsomosmas.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.example.ongsomosmas.adapter.SliderViewAdapter
 import com.example.ongsomosmas.databinding.FragmentNewsBinding
 import com.example.ongsomosmas.views.MainViewModel
 import com.example.ongsomosmas.views.VideModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FragmentNews : Fragment() {
 
@@ -71,6 +73,12 @@ class FragmentNews : Fragment() {
             }
         }
 
+        viewModel.error.observe(viewLifecycleOwner){value ->
+            if(value != null){
+                dialogAlert(getString(R.string.newsNotOK))
+            }
+        }
+
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 viewModel.selectNew(position)
@@ -78,12 +86,14 @@ class FragmentNews : Fragment() {
             }
         })
 
-
-
         viewModel.new.observe(viewLifecycleOwner) { value ->
             if (value != null) {
+                Log.i("DEBUG",value.name)
+                Log.i("DEBUG",value.content)
                 binding.etTitleNews.text = value.name
                 binding.etDetails.text = value.content
+                Log.i("DEBUG",binding.etTitleNews.text.toString())
+                Log.i("DEBUG",binding.etDetails.text.toString())
             }
         }
 
@@ -97,4 +107,16 @@ class FragmentNews : Fragment() {
         return binding.root
 
         }
+    private fun dialogAlert(body: String) {
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(getString(R.string.titleError))
+                .setMessage(body)
+                .setPositiveButton(
+                    getString(R.string.buttonOk)
+                ) { _, _ ->
+                }
+                .show()
+        };
+    }
 }

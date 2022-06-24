@@ -103,7 +103,10 @@ class FragmentSignUp : Fragment() {
         viewModel.samePassword.observe(viewLifecycleOwner) { value ->
             if (value) {
                 binding.tiRepeatPassword.error = ""
-            } else binding.tiRepeatPassword.error = getString(R.string.notSamePassword)
+                binding.tiPassword.error = ""
+            } else
+                binding.tiRepeatPassword.error = getString(R.string.notSamePassword)
+                binding.tiPassword.error = getString(R.string.notSamePassword)
         }
 
         binding.btRegisterButton.setOnClickListener {
@@ -126,8 +129,6 @@ class FragmentSignUp : Fragment() {
                 println("Error Observe  : " + response)
                 if (response != null) {
                     dialogAlert(getString(R.string.bodyErrorRegister))
-
-
                 }
             }
         }
