@@ -29,6 +29,7 @@ class MainViewModel(private val repository: Repository, context: Context) : View
     val news = MutableLiveData<List<News>>(null)
     val members = MutableLiveData<List<Members>>(null)
     val new = MutableLiveData<News>(null)
+    val member = MutableLiveData<Members>(null)
     val postMessage = MutableLiveData<PostMessage?>(null)
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(context.getString(R.string.tokenFile), Context.MODE_PRIVATE)
 
@@ -200,6 +201,10 @@ class MainViewModel(private val repository: Repository, context: Context) : View
 
     fun selectNew(position : Int){
         new.value = news.value?.get(position)
+    }
+
+    fun selectMember(position : Int){
+        member.value = members.value?.get(position)
     }
 
 }

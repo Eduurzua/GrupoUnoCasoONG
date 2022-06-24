@@ -15,53 +15,38 @@ import com.example.ongsomosmas.R
 import com.bumptech.glide.request.target.Target
 import com.example.ongsomosmas.databinding.FragmentNewsBinding
 import com.example.ongsomosmas.databinding.ImageSliderItemBinding
+import com.example.ongsomosmas.databinding.ImageSliderItemMembersBinding
 import com.google.android.material.imageview.ShapeableImageView
 
-class SliderViewAdapter(private val urlList: List<String>) :
-    RecyclerView.Adapter<SliderViewAdapter.SliderViewHolder>() {
+class SliderViewAdapterMembers(private val urlListMembers: List<String>) :
+    RecyclerView.Adapter<SliderViewAdapterMembers.SliderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ImageSliderItemBinding.inflate(layoutInflater, parent, false)
+        val binding = ImageSliderItemMembersBinding.inflate(layoutInflater, parent, false)
         return SliderViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
-        holder.bind(urlList[position])
+        holder.bind(urlListMembers[position])
     }
 
     override fun getItemCount(): Int {
-        return this.urlList.size
+        return this.urlListMembers.size
     }
 
-    class SliderViewHolder(private val binding: ImageSliderItemBinding) :
+    class SliderViewHolder(private val binding: ImageSliderItemMembersBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val sliderImageView =
-            itemView.findViewById<ShapeableImageView>(R.id.slidetImageView)
-       // private val progressBar =
-      //      itemView.findViewById<ShapeableImageView>(R.id.progressBar)
+            itemView.findViewById<ShapeableImageView>(R.id.slidetImageViewMembers)
         fun bind(url: String) {
             Glide.with(itemView.context)
                 .load(url)
                 .fitCenter()
- /*               .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        println("cargo mal")
-                        return true
-                    }
-
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        println("cargo bien")
-                       // progressBar.visibility = View.GONE
-                        return true
-                    }
-
-                })*/
                 .placeholder(R.drawable.placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(sliderImageView)
         }
     }
-
 }
 

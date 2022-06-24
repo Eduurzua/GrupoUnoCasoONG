@@ -88,12 +88,8 @@ class FragmentNews : Fragment() {
 
         viewModel.new.observe(viewLifecycleOwner) { value ->
             if (value != null) {
-                Log.i("DEBUG",value.name)
-                Log.i("DEBUG",value.content)
                 binding.etTitleNews.text = value.name
                 binding.etDetails.text = value.content
-                Log.i("DEBUG",binding.etTitleNews.text.toString())
-                Log.i("DEBUG",binding.etDetails.text.toString())
             }
         }
 
