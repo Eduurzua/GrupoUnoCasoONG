@@ -19,21 +19,45 @@ class FragmentHome : Fragment() {
     private val viewModel: MainViewModel by viewModels(
         factoryProducer = { VideModelFactory(requireContext()) }
     )
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+        this.setHasOptionsMenu(true)
+
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             activity?.finish()
         }
 
-        binding.button3.setOnClickListener(){
+        binding.etLastNam.text = viewModel.findUser()
+
+        /*Visibilidades de menu*/
+        binding.MenuButton.setOnClickListener() {
+            binding.menu.visibility = View.VISIBLE
+            binding.MenuButton.visibility = View.GONE
+        }
+        binding.iconClear.setOnClickListener() {
+            binding.menu.visibility = View.GONE
+            binding.MenuButton.visibility = View.VISIBLE
+        }
+
+        /*Opciones menu*/
+        binding.iconContact.setOnClickListener() {
+            findNavController().navigate(R.id.action_home_to_contact)
+        }
+        binding.iconNews.setOnClickListener() {
             findNavController().navigate(R.id.action_home_to_news)
         }
+        binding.iconStaff.setOnClickListener() {
+            findNavController().navigate(R.id.action_home_to_members)
+        }
+
+        /*ojo como vuelve hacia atrás cuando esté implementado(Listooo!)*/
+
 
         return binding.root
     }

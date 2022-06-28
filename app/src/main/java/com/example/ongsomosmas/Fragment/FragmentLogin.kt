@@ -3,10 +3,10 @@ package com.example.ongsomosmas.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -60,6 +60,15 @@ class FragmentLogin : Fragment() {
         viewModel.enableButton.observe(viewLifecycleOwner) { value ->
             binding.btnLogin.isEnabled = value
         }
+        viewModel.loading.observe(viewLifecycleOwner) { value ->
+            if (value) {
+                binding.btnLogin.isEnabled = false
+                binding.progressCircular.visibility = View.VISIBLE
+            } else {
+                binding.btnLogin.isEnabled = true
+                binding.progressCircular.visibility = View.GONE
+            }
+        }
 
         binding.btnLogin.setOnClickListener {
             viewModel.loginUser(
@@ -68,21 +77,24 @@ class FragmentLogin : Fragment() {
                     binding.tiPassword.editText?.text.toString()
                 )
             )
-            viewModel.success.observe(viewLifecycleOwner) { response ->
-                println("response observe  : " + response )
-                if (response) {
-                    findNavController().navigate(R.id.action_login_to_home)
-                }
-            }
-            viewModel.error.observe(viewLifecycleOwner) {response ->
-                println("response observe error  : " + response )
-                if (response != null) {
-                    dialogAlert(getString(R.string.bodyErrorLogin))
-
-                }
-            }
-
+            binding.progressCircular.visibility = View.VISIBLE
+            binding.btnLogin.isEnabled = false
         }
+        viewModel.success.observe(viewLifecycleOwner) { response ->
+             if (response) {
+                 binding.progressCircular.visibility = View.GONE
+                 binding.btnLogin.isEnabled = true
+                 findNavController().navigate(R.id.action_login_to_home)
+             }
+        }
+        viewModel.error.observe(viewLifecycleOwner) {response ->
+             if (response != null) {
+                 binding.progressCircular.visibility = View.GONE
+                 binding.btnLogin.isEnabled = true
+                dialogAlert(getString(R.string.bodyErrorLogin))
+               }
+        }
+
         binding.tiEmail.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence?,

@@ -3,71 +3,108 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Fragment.FragmentNews"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_gray">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/top_logo"
         android:layout_width="190dp"
         android:layout_height="100dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintBottom_toTopOf="@+id/vPagerHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo_somos_mas" />
 
-
     <TextView
-        android:id="@+id/et_titleAPi"
-        android:layout_width="213dp"
-        android:layout_height="35dp"
+        android:id="@+id/tittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/contactTittle"
         android:textSize="30sp"
-        android:textAlignment="center"
         android:textColor="@color/black"
-        android:text="@string/popupMenuNews"
-        app:layout_constraintBottom_toTopOf="@+id/vPagerHome"
+        android:textAlignment="center"
+        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_logo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/top_logo"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vPagerHome"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_name_lastname"
+        android:maxLines="1"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@null"
         android:layout_width="match_parent"
-        android:layout_height="221dp"
-        android:layout_marginBottom="172dp"
-        android:contextClickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/MenuButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/name_lastname"
+        android:textColorHint="@color/text_gray"
+        app:layout_constraintTop_toBottomOf="@id/tittle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.631">
-    </androidx.viewpager2.widget.ViewPager2>
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <me.relex.circleindicator.CircleIndicator3
-        android:id="@+id/cIndicator"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corner" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_email"
+        android:maxLines="1"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@null"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/text_gray"
-        app:ci_gravity="center"
-        app:ci_height="5dp"
-        app:ci_margin="5dp"
-        app:ci_orientation="horizontal"
-        app:ci_width="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/et_details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:hint="@string/email"
+        android:textColorHint="@color/text_gray"
+        app:layout_constraintTop_toBottomOf="@id/ti_name_lastname"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vPagerHome"
-        app:layout_constraintVertical_bias="0.0" /> />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corner" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_message"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@null"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginHorizontal="16dp"
+        android:hint="@string/message"
+        android:textColorHint="@color/text_gray"
+        app:layout_constraintTop_toBottomOf="@id/ti_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_corner" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/bt_SendMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sendMessage"
+        android:textAlignment="textStart"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/button_red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ti_message" />
 
     <TextView
         android:id="@+id/et_lastNam"
@@ -80,38 +117,7 @@
         app:layout_constraintEnd_toStartOf="@+id/MenuButton"
         app:layout_constraintHorizontal_bias="0.253"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_details"
-        app:layout_constraintVertical_bias="1.0" />
-
-
-    <TextView
-        android:id="@+id/etTitleNews"
-        android:layout_width="295dp"
-        android:layout_height="24dp"
-        android:layout_marginBottom="236dp"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cIndicator"
-        app:layout_constraintVertical_bias="0.967" />
-
-    <TextView
-        android:id="@+id/et_details"
-        android:layout_width="301dp"
-        android:layout_height="143dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="84dp"
-        android:textAlignment="textStart"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.642"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vPagerHome"
+        app:layout_constraintTop_toBottomOf="@+id/bt_SendMessage"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -140,7 +146,7 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/iconContact"
+            android:id="@+id/icoHome"
             android:layout_width="43dp"
             android:layout_height="35dp"
             app:tint="@color/gray"
@@ -150,19 +156,18 @@
             app:layout_constraintVertical_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_contact" />
-
+            app:srcCompat="@drawable/ic_home" />
 
         <TextView
             android:id="@+id/tv_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/popupMenuContact"
+            android:text="@string/popupMenuHome"
             tools:layout_editor_absoluteX="51dp"
             tools:layout_editor_absoluteY="65dp"
-            app:layout_constraintStart_toStartOf="@id/iconContact"
-            app:layout_constraintEnd_toEndOf="@id/iconContact"
-            app:layout_constraintTop_toBottomOf="@id/iconContact"/>
+            app:layout_constraintStart_toStartOf="@id/icoHome"
+            app:layout_constraintEnd_toEndOf="@id/icoHome"
+            app:layout_constraintTop_toBottomOf="@id/icoHome"/>
 
         <ImageView
             android:id="@+id/iconStaff"
@@ -189,7 +194,7 @@
             app:layout_constraintTop_toBottomOf="@id/iconStaff"/>
 
         <ImageView
-            android:id="@+id/iconHome"
+            android:id="@+id/iconNews"
             android:layout_width="43dp"
             android:layout_height="35dp"
             app:tint="@color/gray"
@@ -199,18 +204,18 @@
             app:layout_constraintVertical_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_news" />
 
         <TextView
             android:id="@+id/tv_news"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/popupMenuHome"
+            android:text="@string/popupMenuNews"
             tools:layout_editor_absoluteX="51dp"
             tools:layout_editor_absoluteY="65dp"
-            app:layout_constraintStart_toStartOf="@id/iconHome"
-            app:layout_constraintEnd_toEndOf="@id/iconHome"
-            app:layout_constraintTop_toBottomOf="@id/iconHome"/>
+            app:layout_constraintStart_toStartOf="@id/iconNews"
+            app:layout_constraintEnd_toEndOf="@id/iconNews"
+            app:layout_constraintTop_toBottomOf="@id/iconNews"/>
 
         <ImageView
             android:id="@+id/iconClear"
@@ -224,9 +229,7 @@
             android:layout_marginEnd="8dp"/>
 
 
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

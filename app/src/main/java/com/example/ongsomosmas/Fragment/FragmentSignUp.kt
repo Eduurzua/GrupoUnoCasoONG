@@ -3,6 +3,7 @@ package com.example.ongsomosmas.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,13 +86,6 @@ class FragmentSignUp : Fragment() {
             }
         }
 
-        binding.tiPassword.editText?.addTextChangedListener {
-            viewModel.samePasswordRepeat(
-                binding.tiPassword.editText?.text.toString().trim(),
-                binding.tiRepeatPassword.editText?.text.toString().trim()
-            )
-        }
-
         binding.tiRepeatPassword.editText?.addTextChangedListener {
             viewModel.samePasswordRepeat(
                 binding.tiPassword.editText?.text.toString().trim(),
@@ -99,11 +93,30 @@ class FragmentSignUp : Fragment() {
             )
         }
 
+        binding.tiPassword.editText?.addTextChangedListener {
+            viewModel.samePasswordRepeat(
+                binding.tiPassword.editText?.text.toString().trim(),
+                binding.tiRepeatPassword.editText?.text.toString().trim()
+            )
+        }
+        viewModel.loading.observe(viewLifecycleOwner) { value ->
+            if (value) {
+                binding.btRegisterButton.isEnabled = false
+                binding.progressCircular.visibility = View.GONE
+            } else {
+                binding.btRegisterButton.isEnabled = true
+                binding.progressCircular.visibility = View.GONE
+            }
+        }
+
+
         /*observando password para que sean iguales*/
         viewModel.samePassword.observe(viewLifecycleOwner) { value ->
             if (value) {
                 binding.tiRepeatPassword.error = ""
-            } else binding.tiRepeatPassword.error = getString(R.string.notSamePassword)
+                binding.tiPassword.error = ""
+            } else
+                binding.tiRepeatPassword.error = getString(R.string.notSamePassword)
         }
 
         binding.btRegisterButton.setOnClickListener {
@@ -114,21 +127,24 @@ class FragmentSignUp : Fragment() {
                     binding.tiEmail.editText?.text.toString(),
                     binding.tiPassword.editText?.text.toString()
                 )
+
             )
+            binding.progressCircular.visibility = View.VISIBLE
+            binding.btRegisterButton.isEnabled = false
+        }
+        viewModel.success.observe(viewLifecycleOwner) { response ->
+            if (response) {
+                binding.progressCircular.visibility = View.GONE
+                dialogAlertRegister(getString(R.string.bodyRegisterOK))
+                binding.btRegisterButton.isEnabled = true
 
-            viewModel.success.observe(viewLifecycleOwner) { response ->
-                println("Success Observe  : " + response)
-                if (response) {
-                    dialogAlertRegister(getString(R.string.bodyRegisterOK))
-                }
             }
-            viewModel.error.observe(viewLifecycleOwner) { response ->
-                println("Error Observe  : " + response)
-                if (response != null) {
-                    dialogAlert(getString(R.string.bodyErrorRegister))
-
-
-                }
+        }
+        viewModel.error.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                dialogAlert(getString(R.string.bodyErrorRegister))
+                binding.btRegisterButton.isEnabled = true
+                binding.progressCircular.visibility = View.GONE
             }
         }
 
@@ -207,30 +223,7 @@ class FragmentSignUp : Fragment() {
             }
 
         })
-        binding.tiRepeatPassword.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
 
-            }
-
-            override fun onTextChanged(
-                s: CharSequence?,
-                start: Int,
-                before: Int,
-                count: Int
-            ) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-                binding.tiRepeatPassword.error = ""
-            }
-
-        })
 
         return binding.root
     }
